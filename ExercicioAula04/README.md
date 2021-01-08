@@ -24,24 +24,24 @@
 ----
 ### Modelos:
 
-    1. Etiqueta para correspondência:
-		Cas       1. pessoa física:
-                       José da Silva
-                       Rua tal, 123/100...
-               2. pessoa jurídica:
-                       Empresa X Ltda
-                       Aos cuidaddos de José da Silva
-                       Rua tal, 123/100...
-    2. Carta de cobrança:
-      1. Caso pessoa física:
-     Caro(a) José da Silva, você me deve!
-      2. Caso pessoa jurídica:
-     Caro José da Silva, a Empresa X Ltda me deve!
-      3. Nota promissória:
+1. Etiqueta para correspondência:
+	 1. pessoa física:
+          José da Silva
+          Rua tal, 123/100...
+    2. pessoa jurídica:
+        Empresa X Ltda
+        Aos cuidaddos de José da Silva
+        Rua tal, 123/100...
+2. Carta de cobrança:
         1. Caso pessoa física:
-     Eu José da Silva prometo que vou pagar R$ na data ...
+            Caro(a) José da Silva, você me deve!
         2. Caso pessoa jurídica:
-     Eu José da Silva representante legal da empresa x prometo que vou pagar
+            Caro José da Silva, a Empresa X Ltda me deve!
+  3. Nota promissória:
+         1. Caso pessoa física:
+        Eu José da Silva prometo que vou pagar R$ na data ...
+            2. Caso pessoa jurídica:
+               Eu José da Silva representante legal da empresa x prometo que vou pagar
 
 ---
 
