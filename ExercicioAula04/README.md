@@ -56,3 +56,11 @@
   - Complemento
   - Unidade da federação
   - País
+
+- Criar uma interface IMensagemCobranca
+  - Ela vai ser assinada por "Etiqueta", "Carta de Cobrança" e "Nota promissória"
+  - Conterá:
+    - Remetente
+    - Destinatário (PJ ou PF)
+    - Valor
+    - Endereço
