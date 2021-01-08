@@ -9,6 +9,7 @@ namespace Composicao
         public DateTime DataVencimento { get; set; }
         public DateTime DataPagamento { get; set; }
         public double ValorPago { get; set; }
+
         public DateTime DataEmissao
         {
             get => DataEmissao;
