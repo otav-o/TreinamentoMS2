@@ -42,3 +42,17 @@
      Eu José da Silva prometo que vou pagar R$ na data ...
         2. Caso pessoa jurídica:
      Eu José da Silva representante legal da empresa x prometo que vou pagar
+
+---
+
+### Extras
+
+- Criar uma classe endereço
+- Endereço
+  - Rua
+  - Bairro
+  - Cidade
+  - Número
+  - Complemento
+  - Unidade da federação
+  - País
