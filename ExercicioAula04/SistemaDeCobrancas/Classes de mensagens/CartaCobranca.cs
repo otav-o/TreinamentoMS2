@@ -6,9 +6,35 @@ namespace SistemaDeCobrancas.Classes_de_mensagens
 {
     class CartaCobranca : IMensagemCobranca
     {
-        public Pessoa Remetente { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public Pessoa Destinatario { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public double ValorCobranca { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public EnderecoModelo EnderecoDestino { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public Pessoa Remetente { get; set; }
+        public Pessoa Destinatario { get; set; }
+        public double ValorCobranca { get; set; }
+        public EnderecoModelo EnderecoDestino { get; set; }
+
+        public CartaCobranca(Pessoa remetente, Pessoa destinatario, double valorCobranca)
+        {
+            Remetente = remetente;
+            Destinatario = destinatario;
+            ValorCobranca = valorCobranca;
+            EnderecoDestino = Destinatario.Endereco; 
+        }
+
+        public string MensagemGerada
+        {
+            get
+            {
+                string textoFinal = "";
+                if (Destinatario is PessoaFisica)
+                {
+                    textoFinal = $"Caro(a) {Destinatario.Nome}, você me deve!";
+                }
+                else if (Destinatario is PessoaJuridica)
+                {
+                    var p = (PessoaJuridica)Destinatario;
+                    textoFinal = $"Caro(a) {p.ContatoCobranca}, a empresa {p.Nome} me deve!";
+                }
+                return textoFinal;
+            }
+        }
     }
 }

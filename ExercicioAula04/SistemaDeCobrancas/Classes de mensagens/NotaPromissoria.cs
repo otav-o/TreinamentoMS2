@@ -6,9 +6,11 @@ namespace SistemaDeCobrancas.Classes_de_mensagens
 {
     class NotaPromissoria : IMensagemCobranca
     {
-        public Pessoa Remetente { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public Pessoa Destinatario { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public double ValorCobranca { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public EnderecoModelo EnderecoDestino { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public Pessoa Remetente { get; set; }
+        public Pessoa Destinatario { get; set; }
+        public double ValorCobranca { get; set; }
+        public EnderecoModelo EnderecoDestino { get; set; }
+
+        public string MensagemGerada => throw new NotImplementedException();
     }
 }
