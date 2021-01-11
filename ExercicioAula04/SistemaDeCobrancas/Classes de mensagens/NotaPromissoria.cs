@@ -28,7 +28,7 @@ namespace SistemaDeCobrancas.Classes_de_mensagens
 
                 string nomeHumano = Remetente.Nome; // na nota promissória, o remetente é o devedor
 
-                if (Remetente is PessoaFisica) 
+                if (Remetente is PessoaJuridica) 
                 {
                     p = Remetente as PessoaJuridica;
                     textoIntermediario = $" representante legal da empresa {p.Nome}, ";

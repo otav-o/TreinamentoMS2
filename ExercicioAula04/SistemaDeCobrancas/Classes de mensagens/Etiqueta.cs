@@ -10,7 +10,7 @@ namespace SistemaDeCobrancas.Classes_de_mensagens
         public Pessoa Destinatario { get; set; }
         public EnderecoModelo EnderecoDestino { get; set; }
 
-        public Etiqueta(Pessoa remetente, Pessoa destinatario)
+        public Etiqueta(Pessoa destinatario, Pessoa remetente = null)
         {
             Remetente = remetente;
             Destinatario = destinatario;
