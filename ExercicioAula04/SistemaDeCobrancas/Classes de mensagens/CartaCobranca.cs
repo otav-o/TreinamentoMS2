@@ -31,7 +31,7 @@ namespace SistemaDeCobrancas.Classes_de_mensagens
                 else if (Destinatario is PessoaJuridica)
                 {
                     var p = (PessoaJuridica)Destinatario;
-                    textoFinal = $"Caro(a) {p.ContatoCobranca}, a empresa {p.Nome} me deve!";
+                    textoFinal = $"Caro(a) {p.ContatoCobranca.Nome}, a empresa {p.Nome} me deve!";
                 }
                 return textoFinal;
             }

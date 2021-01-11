@@ -35,7 +35,7 @@
 2. Carta de cobrança:
         1. Caso pessoa física:
             Caro(a) José da Silva, você me deve!
-        2. Caso pessoa jurídica:
+            2. Caso pessoa jurídica:
             Caro José da Silva, a Empresa X Ltda me deve!
   3. Nota promissória:
          1. Caso pessoa física:
@@ -64,3 +64,10 @@
     - Destinatário (PJ ou PF)
     - Valor
     - Endereço
+
+---
+
+### Revendo o planejamento
+
+- Criar a classe Dívida e gerar as mensagens a partir dela?
+
