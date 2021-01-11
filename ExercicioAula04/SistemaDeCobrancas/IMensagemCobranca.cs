@@ -24,5 +24,7 @@ namespace SistemaDeCobrancas
         public EnderecoModelo EnderecoDestino { get; set; }
 
 
+        public string MensagemGerada { get; }
+
     }
 }
