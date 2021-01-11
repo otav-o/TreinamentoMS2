@@ -14,5 +14,13 @@ namespace SistemaDeCobrancas
         public string Uf { get; set; }
         public string Pais { get; set; } = "Brasil";
 
+        public EnderecoModelo(string rua, string bairro, string cidade, int numero, int complemento)
+        {
+            Rua = rua;
+            Bairro = bairro;
+            Cidade = cidade;
+            Numero = numero;
+            Complemento = complemento;
+        }
     }
 }

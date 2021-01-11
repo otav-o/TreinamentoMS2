@@ -9,5 +9,15 @@ namespace SistemaDeCobrancas
         public string Cpf { get; set; }
         public DateTime DataNascimento { get => DataNascimento.Date; set { } }
 
+        public PessoaFisica (string nome, string email, EnderecoModelo endereco, string cpf, DateTime dataNasc)
+        {
+            Nome = nome;
+            Email = email;
+            Endereco = endereco;
+            Cpf = cpf;
+            DataNascimento = dataNasc;
+        }
+
+
     }
 }

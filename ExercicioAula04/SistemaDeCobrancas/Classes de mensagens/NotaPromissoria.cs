@@ -17,23 +17,25 @@ namespace SistemaDeCobrancas.Classes_de_mensagens
         public Pessoa Destinatario { get; set; }
         public double Valor { get; set; }
         public EnderecoModelo EnderecoDestino { get; set; }
-
         public DateTime DataVencimento { get; set; }
 
         public string MensagemGerada
         {
             get
             {
-                string textoFinal = "";
                 string textoIntermediario = "";
                 PessoaJuridica p;
+
+                string nomeHumano = Remetente.Nome; // na nota promissória, o remetente é o devedor
+
                 if (Remetente is PessoaFisica) 
                 {
-                    textoIntermediario = $" representante legal da empresa {nomeEmpresa}, ";
                     p = Remetente as PessoaJuridica;
+                    textoIntermediario = $" representante legal da empresa {p.Nome}, ";
+                    nomeHumano = p.ContatoCobranca.Nome;
                 }
-                
-                textoFinal = $"Eu, {nomeHumano}," + textoIntermediario + $" prometo pagar {ValorCobranca} na data"
+
+                return $"Eu, {nomeHumano}," + textoIntermediario + $" prometo pagar {Valor} até a data {DataVencimento}";
             }
         }
 

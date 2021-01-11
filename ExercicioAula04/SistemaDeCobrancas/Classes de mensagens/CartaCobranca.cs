@@ -26,17 +26,15 @@ namespace SistemaDeCobrancas.Classes_de_mensagens
         {
             get
             {
-                string textoFinal = "";
                 if (Destinatario is PessoaFisica)
                 {
-                    textoFinal = $"Caro(a) {Destinatario.Nome}, você me deve!";
+                    return $"Caro(a) {Destinatario.Nome}, você me deve!";
                 }
-                else if (Destinatario is PessoaJuridica)
+                else
                 {
                     var p = (PessoaJuridica)Destinatario;
-                    textoFinal = $"Caro(a) {p.ContatoCobranca.Nome}, a empresa {p.Nome} me deve!";
+                    return $"Caro(a) {p.ContatoCobranca.Nome}, a empresa {p.Nome} me deve!";
                 }
-                return textoFinal;
             }
         }
     }
