@@ -4,7 +4,7 @@ using System.Text;
 
 namespace SistemaDeCobrancas
 {
-    interface IMensagemCobranca
+    interface IMensagem
     {
         /// <summary>
         /// Pessoa que envia a mensagem
@@ -16,12 +16,10 @@ namespace SistemaDeCobrancas
         /// </summary>
         public Pessoa Destinatario { get; set; }
 
-
         /// <summary>
         /// Endereço do destinatário da mensagem
         /// </summary>
         public EnderecoModelo EnderecoDestino { get; set; }
-
 
         public string MensagemGerada { get; }
 

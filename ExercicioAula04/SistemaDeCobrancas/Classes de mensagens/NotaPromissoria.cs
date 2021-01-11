@@ -15,8 +15,10 @@ namespace SistemaDeCobrancas.Classes_de_mensagens
         /// Pessoa que recebe a promessa de pagamento
         /// </summary>
         public Pessoa Destinatario { get; set; }
-        public double ValorCobranca { get; set; }
+        public double Valor { get; set; }
         public EnderecoModelo EnderecoDestino { get; set; }
+
+        public DateTime DataVencimento { get; set; }
 
         public string MensagemGerada
         {
@@ -39,7 +41,7 @@ namespace SistemaDeCobrancas.Classes_de_mensagens
         {
             Remetente = remetente;
             Destinatario = destinatario;
-            ValorCobranca = valorCobranca;
+            Valor = valorCobranca;
             EnderecoDestino = destinatario.Endereco;
         }
     }

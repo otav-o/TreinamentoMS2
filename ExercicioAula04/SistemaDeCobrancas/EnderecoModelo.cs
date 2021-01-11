@@ -12,7 +12,7 @@ namespace SistemaDeCobrancas
         public int Numero { get; set; }
         public int Complemento { get; set; }
         public string Uf { get; set; }
-        public string Country { get; set; } = "Brasil";
+        public string Pais { get; set; } = "Brasil";
 
     }
 }

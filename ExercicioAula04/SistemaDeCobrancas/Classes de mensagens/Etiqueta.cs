@@ -4,7 +4,7 @@ using System.Text;
 
 namespace SistemaDeCobrancas.Classes_de_mensagens
 {
-    class Etiqueta : IMensagemCobranca
+    class Etiqueta : IMensagem
     {
         public Pessoa Remetente { get; set; }
         public Pessoa Destinatario { get; set; }

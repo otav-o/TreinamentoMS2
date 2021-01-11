@@ -11,6 +11,9 @@ namespace SistemaDeCobrancas.Classes_de_mensagens
         public double ValorCobranca { get; set; }
         public EnderecoModelo EnderecoDestino { get; set; }
 
+        public double Valor { get; set; }
+        public DateTime DataVencimento { get; set; }
+
         public CartaCobranca(Pessoa remetente, Pessoa destinatario, double valorCobranca)
         {
             Remetente = remetente;
