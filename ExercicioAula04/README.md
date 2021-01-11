@@ -30,7 +30,7 @@
           Rua tal, 123/100...
     2. pessoa jurídica:
         Empresa X Ltda
-        Aos cuidaddos de José da Silva
+        Aos cuidados de José da Silva
         Rua tal, 123/100...
 2. Carta de cobrança:
         1. Caso pessoa física:

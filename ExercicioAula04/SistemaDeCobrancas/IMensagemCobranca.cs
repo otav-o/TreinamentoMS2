@@ -16,13 +16,14 @@ namespace SistemaDeCobrancas
         /// </summary>
         public Pessoa Destinatario { get; set; }
 
-        public double ValorCobranca { get; set; }
 
         /// <summary>
         /// Endereço do destinatário da mensagem
         /// </summary>
         public EnderecoModelo EnderecoDestino { get; set; }
 
+
+        public string MensagemGerada { get; }
 
     }
 }
