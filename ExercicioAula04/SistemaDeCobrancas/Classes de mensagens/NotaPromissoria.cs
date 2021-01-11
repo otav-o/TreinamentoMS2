@@ -6,17 +6,8 @@ namespace SistemaDeCobrancas.Classes_de_mensagens
 {
     class NotaPromissoria : IMensagemCobranca
     {
-        /// <summary>
-        /// Pessoa/empresa que está devendo e promete pagar
-        /// </summary>
-        public Pessoa Remetente { get; set; }
-
-        /// <summary>
-        /// Pessoa que recebe a promessa de pagamento
-        /// </summary>
-        public Pessoa Destinatario { get; set; }
+        public Etiqueta Cabecalho { get; set; }
         public double Valor { get; set; }
-        public EnderecoModelo EnderecoDestino { get; set; }
 
         public DateTime DataVencimento { get; set; }
 
@@ -26,23 +17,23 @@ namespace SistemaDeCobrancas.Classes_de_mensagens
             {
                 string textoFinal = "";
                 string textoIntermediario = "";
+                string nomeHumano = Cabecalho.Remetente.Nome;
+
                 PessoaJuridica p;
-                if (Remetente is PessoaFisica) 
+
+                if (Cabecalho.Remetente is PessoaJuridica) // em uma nota promissória, o remetente é o devedor
                 {
-                    textoIntermediario = $" representante legal da empresa {nomeEmpresa}, ";
-                    p = Remetente as PessoaJuridica;
+                    textoIntermediario = $" representante legal da empresa {Cabecalho.Remetente.Nome}, ";
+                    p = Cabecalho.Remetente as PessoaJuridica;
+                    nomeHumano = p.ContatoCobranca.Nome;
                 }
-                
-                textoFinal = $"Eu, {nomeHumano}," + textoIntermediario + $" prometo pagar {ValorCobranca} na data"
+                textoFinal = $"Eu, {nomeHumano}," + textoIntermediario + $" prometo pagar {Valor} até a data {DataVencimento}";
+                //TODO resolver essa confusão entre nomes (p e Cabecalho.Remetente)
+
+                return textoFinal;
             }
         }
 
-        public NotaPromissoria(Pessoa remetente, Pessoa destinatario, double valorCobranca)
-        {
-            Remetente = remetente;
-            Destinatario = destinatario;
-            Valor = valorCobranca;
-            EnderecoDestino = destinatario.Endereco;
-        }
+        
     }
 }

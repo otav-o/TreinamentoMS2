@@ -6,9 +6,7 @@ namespace SistemaDeCobrancas.Classes_de_mensagens
 {
     class CartaCobranca : IMensagemCobranca
     {
-        public Pessoa Remetente { get; set; }
-        public Pessoa Destinatario { get; set; }
-        public double ValorCobranca { get; set; }
+     
         public EnderecoModelo EnderecoDestino { get; set; }
 
         public double Valor { get; set; }
@@ -18,7 +16,7 @@ namespace SistemaDeCobrancas.Classes_de_mensagens
         {
             Remetente = remetente;
             Destinatario = destinatario;
-            ValorCobranca = valorCobranca;
+            Valor = valorCobranca;
             EnderecoDestino = Destinatario.Endereco; 
         }
 

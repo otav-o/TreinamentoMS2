@@ -24,4 +24,4 @@ namespace SistemaDeCobrancas
         public string MensagemGerada { get; }
 
     }
-}
+} // no final, essa interface tornou-se inútil

@@ -14,11 +14,12 @@ namespace SistemaDeCobrancas
         public DateTime Vencimento { get; set; }
         public double Valor { get; set; }
 
-        public Divida(Pessoa credor, Pessoa devedor, DateTime vencimento)
+        public Divida(Pessoa credor, Pessoa devedor, DateTime vencimento, double valor)
         {
             Credor = credor;
             Devedor = devedor;
             Vencimento = vencimento;
+            Valor = valor;
         }
     }
 }
