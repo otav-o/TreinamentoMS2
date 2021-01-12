@@ -6,17 +6,8 @@ namespace SistemaDeCobrancas.Classes_de_mensagens
 {
     class NotaPromissoria : IMensagemCobranca
     {
-        /// <summary>
-        /// Pessoa/empresa que está devendo e promete pagar
-        /// </summary>
-        public Pessoa Remetente { get; set; }
-
-        /// <summary>
-        /// Pessoa que recebe a promessa de pagamento
-        /// </summary>
-        public Pessoa Destinatario { get; set; }
+        public Etiqueta Etiqueta { get; set; }
         public double Valor { get; set; }
-        public EnderecoModelo EnderecoDestino { get; set; }
         public DateTime DataVencimento { get; set; }
 
         public string MensagemGerada
@@ -26,33 +17,29 @@ namespace SistemaDeCobrancas.Classes_de_mensagens
                 string textoIntermediario = "";
                 PessoaJuridica p;
 
-                string nomeHumano = Remetente.Nome; // na nota promissória, o remetente é o devedor
+                string nomeHumano = Etiqueta.Remetente.Nome; // na nota promissória, o remetente (que envia) é o devedor
 
-                if (Remetente is PessoaJuridica) 
+                if (Etiqueta.Remetente is PessoaJuridica) 
                 {
-                    p = Remetente as PessoaJuridica;
+                    p = Etiqueta.Remetente as PessoaJuridica;
                     textoIntermediario = $"representante legal da empresa {p.Nome}, ";
                     nomeHumano = p.ContatoCobranca.Nome;
                 }
 
-                return $"Eu, {nomeHumano}, " + textoIntermediario + $"prometo pagar {Valor} até a data {DataVencimento.Date}";
+                return $"Eu, {nomeHumano}, " + textoIntermediario + $"prometo pagar {Valor} para {Etiqueta.Destinatario.Nome} até a data {DataVencimento.Date}";
             }
         }
 
-        public NotaPromissoria(Pessoa remetente, Pessoa destinatario, double valorCobranca, DateTime dataVencimento)
+        public NotaPromissoria(Pessoa devedor, Pessoa credor, double valorCobranca, DateTime dataVencimento)
         {
-            Remetente = remetente;
-            Destinatario = destinatario;
+            Etiqueta = new Etiqueta(credor, devedor);
             Valor = valorCobranca;
-            EnderecoDestino = destinatario.Endereco;
             DataVencimento = dataVencimento;
         }
         public NotaPromissoria(Divida d)
         {
-            Remetente = d.Devedor;
-            Destinatario = d.Credor;
+            Etiqueta = new Etiqueta(d.Credor, d.Devedor);
             Valor = d.Valor;
-            EnderecoDestino = Destinatario.Endereco;
             DataVencimento = d.Vencimento;
         }
     }

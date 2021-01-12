@@ -11,16 +11,33 @@ namespace SistemaDeCobrancas
             Pessoa[] pessoas = CriarVetorPessoas();
 
             List<Divida> dividas = criarDividasAleatorias(pessoas);
-
-            ImprimirCartaCobranca(dividas);
-
-            ImprimirNotasPromissorias(pessoas);
-
-            
+            ImprimirTudo(dividas);
 
             Console.ReadLine();
         }
+        private static void ImprimirTudo(List<Divida> dividas)
+        {
+            foreach (Divida d in dividas)
+            {
+                var carta = new CartaCobranca(d);
+                var etiquetaCarta = carta.Etiqueta.MensagemGerada;
+                var nota = new NotaPromissoria(d);
+                var etiquetaNota = nota.Etiqueta.MensagemGerada;
 
+                Console.WriteLine();
+                Console.WriteLine(etiquetaCarta);
+                Console.WriteLine("    " + carta.MensagemGerada);
+                Console.WriteLine(etiquetaNota);
+                Console.WriteLine("    " + nota.MensagemGerada);
+            }
+
+        }
+
+        /// <summary>
+        /// Cria dívidas entre as pessoas de uma lista
+        /// </summary>
+        /// <param name="pessoas">Lista de pessoas</param>
+        /// <returns></returns>
         private static List<Divida> criarDividasAleatorias(Pessoa[] pessoas) 
         {
             List<Divida> dividas = new List<Divida>();
@@ -28,7 +45,7 @@ namespace SistemaDeCobrancas
             int valor;
             for (int i = 0; i < pessoas.Length; i++)
             {
-                for (int j = 0; j < pessoas.Length; j++)
+                for (int j = pessoas.Length - 1; j > 0; j--)
                 {
                     valor = random.Next(1000);
                     dividas.Add(new Divida(pessoas[i], pessoas[j], valor, DateTime.Now.AddDays(180).Date));
@@ -36,29 +53,6 @@ namespace SistemaDeCobrancas
             }
 
             return dividas;
-        }
-
-        private static void ImprimirNotasPromissorias(Pessoa[] pessoas)
-        {
-            foreach (Pessoa p in pessoas)
-            {
-                IMensagem msg = new NotaPromissoria(p, pessoas[0], 1000, new DateTime(2021, 04, 01));
-                Console.WriteLine(msg.MensagemGerada);
-            }
-        }
-
-        private static void ImprimirCartaCobranca(List<Divida> dividas)
-        {
-            foreach(Divida d in dividas)
-            {
-                IMensagem msg = new CartaCobranca(d);
-                Console.WriteLine(msg.MensagemGerada);
-                // msg = new Etiqueta(d);
-            }
-        }
-
-        private static void ImprimirEtiquetas(List<Divida> dividas)
-        {
         }
 
         static Pessoa[] CriarVetorPessoas()

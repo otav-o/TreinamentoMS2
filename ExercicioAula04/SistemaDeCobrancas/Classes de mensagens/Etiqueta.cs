@@ -28,7 +28,7 @@ namespace SistemaDeCobrancas.Classes_de_mensagens
                     textoIntermediario = $"Aos cuidados de {p.ContatoCobranca.Nome}\n";
                 }
                 
-                string textoFinal = $"{this.Destinatario}\n" + textoIntermediario +
+                string textoFinal = $"-------\nPara: {this.Destinatario.Nome}\n" + textoIntermediario +
                     $"{this.EnderecoDestino.Rua}, {this.EnderecoDestino.Numero}/{this.EnderecoDestino.Complemento}\n" +
                     $"{this.EnderecoDestino.Bairro}, {this.EnderecoDestino.Cidade}.";
 
