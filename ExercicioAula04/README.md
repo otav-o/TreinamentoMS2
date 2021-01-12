@@ -71,10 +71,11 @@
 
 - Criar a classe Dívida e gerar as mensagens a partir dela?
 - Carta de cobrança e Nota promissória precisam ter uma etiqueta?
-  - Acredito que sim. Então vou ter que mudar o diagrama abaixo
-  - Cada mensagem vai ter sua etiqueta.
-- As mensagens serão geradas a partir de um objeto dívida ou por um construtor que passa todas as propriedades
-  - Gostei mais da primeira opção, então vou ter que mudar todas as classes de mensagem!
+  - Acredito que sim, **cada mensagem vai ter sua etiqueta**.
+- **As mensagens serão geradas a partir de um objeto dívida** ou por um construtor que passa todas as propriedades
+  - Gostei mais da primeira opção
 
-![image-20210111152032530](image-20210111152032530.png)
+#### Atenção: apenas um esboço
+
+![image-20210112134907135](image-20210112134907135.png)
 
