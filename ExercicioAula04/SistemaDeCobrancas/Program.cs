@@ -6,11 +6,10 @@ namespace SistemaDeCobrancas
 {
     class Program
     {
-        static void Main(string[] args)
+        static void Main()
         {
             Pessoa[] pessoas = CriarVetorPessoas();
-
-            List<Divida> dividas = criarDividasAleatorias(pessoas);
+            List<Divida> dividas = CriarDividasAleatorias(pessoas);
             ImprimirTudo(dividas);
 
             Console.ReadLine();
@@ -38,7 +37,7 @@ namespace SistemaDeCobrancas
         /// </summary>
         /// <param name="pessoas">Lista de pessoas</param>
         /// <returns></returns>
-        private static List<Divida> criarDividasAleatorias(Pessoa[] pessoas) 
+        private static List<Divida> CriarDividasAleatorias(Pessoa[] pessoas) 
         {
             List<Divida> dividas = new List<Divida>();
             Random random = new Random();

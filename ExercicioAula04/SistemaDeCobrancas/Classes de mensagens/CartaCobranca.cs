@@ -6,9 +6,9 @@ namespace SistemaDeCobrancas.Classes_de_mensagens
 {
     class CartaCobranca : IMensagemCobranca
     {
-        public Etiqueta Etiqueta { get; set; }
-        public double Valor { get; set; }
-        public DateTime DataVencimento { get; set; }
+        public Etiqueta Etiqueta { get; }
+        public double Valor { get; }
+        public DateTime DataVencimento { get; }
 
         public CartaCobranca(Pessoa credor, Pessoa devedor, double valorCobranca)
         {

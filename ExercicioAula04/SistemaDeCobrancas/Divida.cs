@@ -9,10 +9,10 @@ namespace SistemaDeCobrancas
         /// <summary>
         /// Beneficiário - a quem se deve
         /// </summary>
-        public Pessoa Credor { get; set; }
-        public Pessoa Devedor { get; set; }
-        public DateTime Vencimento { get; set; }
-        public double Valor { get; set; }
+        public Pessoa Credor { get; }
+        public Pessoa Devedor { get; }
+        public DateTime Vencimento { get; }
+        public double Valor { get; }
 
         public Divida(Pessoa credor, Pessoa devedor, double valor, DateTime vencimento)
         {

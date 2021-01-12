@@ -6,9 +6,9 @@ namespace SistemaDeCobrancas.Classes_de_mensagens
 {
     class Etiqueta : IMensagem
     {
-        public Pessoa Remetente { get; set; }
-        public Pessoa Destinatario { get; set; }
-        public EnderecoModelo EnderecoDestino { get; set; }
+        public Pessoa Remetente { get; }
+        public Pessoa Destinatario { get; }
+        public EnderecoModelo EnderecoDestino { get; }
 
         public Etiqueta(Pessoa destinatario, Pessoa remetente = null)
         {

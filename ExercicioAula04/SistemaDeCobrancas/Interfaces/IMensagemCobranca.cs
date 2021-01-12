@@ -16,6 +16,7 @@ namespace SistemaDeCobrancas
         /// </summary>
         public double Valor { get; }
         public DateTime DataVencimento { get; }
+        public string MensagemGerada { get; }
 
     }
 }
