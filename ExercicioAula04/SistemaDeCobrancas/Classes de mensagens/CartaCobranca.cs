@@ -8,9 +8,7 @@ namespace SistemaDeCobrancas.Classes_de_mensagens
     {
         public Pessoa Remetente { get; set; }
         public Pessoa Destinatario { get; set; }
-        public double ValorCobranca { get; set; }
         public EnderecoModelo EnderecoDestino { get; set; }
-
         public double Valor { get; set; }
         public DateTime DataVencimento { get; set; }
 
@@ -18,8 +16,17 @@ namespace SistemaDeCobrancas.Classes_de_mensagens
         {
             Remetente = remetente;
             Destinatario = destinatario;
-            ValorCobranca = valorCobranca;
+            Valor = valorCobranca;
             EnderecoDestino = Destinatario.Endereco; 
+        }
+
+        public CartaCobranca(Divida d)
+        {
+            Remetente = d.Credor;
+            Destinatario = d.Devedor;
+            Valor = d.Valor;
+            EnderecoDestino = d.Devedor.Endereco;
+            DataVencimento = d.Vencimento;
         }
 
         public string MensagemGerada
@@ -28,12 +35,12 @@ namespace SistemaDeCobrancas.Classes_de_mensagens
             {
                 if (Destinatario is PessoaFisica)
                 {
-                    return $"Caro(a) {Destinatario.Nome}, você me deve!";
+                    return $"Caro(a) {Destinatario.Nome}, você me deve R${Valor:N2}!";
                 }
                 else
                 {
                     var p = (PessoaJuridica)Destinatario;
-                    return $"Caro(a) {p.ContatoCobranca.Nome}, a empresa {p.Nome} me deve!";
+                    return $"Caro(a) {p.ContatoCobranca.Nome}, a empresa {p.Nome} me deve R${Valor:N2}!";
                 }
             }
         }

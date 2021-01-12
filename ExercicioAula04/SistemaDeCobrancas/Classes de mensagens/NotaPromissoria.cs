@@ -31,20 +31,29 @@ namespace SistemaDeCobrancas.Classes_de_mensagens
                 if (Remetente is PessoaJuridica) 
                 {
                     p = Remetente as PessoaJuridica;
-                    textoIntermediario = $" representante legal da empresa {p.Nome}, ";
+                    textoIntermediario = $"representante legal da empresa {p.Nome}, ";
                     nomeHumano = p.ContatoCobranca.Nome;
                 }
 
-                return $"Eu, {nomeHumano}," + textoIntermediario + $" prometo pagar {Valor} até a data {DataVencimento}";
+                return $"Eu, {nomeHumano}, " + textoIntermediario + $"prometo pagar {Valor} até a data {DataVencimento.Date}";
             }
         }
 
-        public NotaPromissoria(Pessoa remetente, Pessoa destinatario, double valorCobranca)
+        public NotaPromissoria(Pessoa remetente, Pessoa destinatario, double valorCobranca, DateTime dataVencimento)
         {
             Remetente = remetente;
             Destinatario = destinatario;
             Valor = valorCobranca;
             EnderecoDestino = destinatario.Endereco;
+            DataVencimento = dataVencimento;
+        }
+        public NotaPromissoria(Divida d)
+        {
+            Remetente = d.Devedor;
+            Destinatario = d.Credor;
+            Valor = d.Valor;
+            EnderecoDestino = Destinatario.Endereco;
+            DataVencimento = d.Vencimento;
         }
     }
 }

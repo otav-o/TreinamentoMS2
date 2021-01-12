@@ -9,8 +9,8 @@ namespace SistemaDeCobrancas
         /// <summary>
         /// Valor da dívida
         /// </summary>
-        public double Valor { get; set; }
-        public DateTime DataVencimento { get; set; }
+        public double Valor { get; }
+        public DateTime DataVencimento { get; }
 
     }
 }
