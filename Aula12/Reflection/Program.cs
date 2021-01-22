@@ -84,6 +84,7 @@ namespace Reflection
             foreach (var prop in tipo.GetProperties()) // para cada propriedade
             {
                 retorno += separador + prop.GetValue(objeto); // pega o valor desta propriedade em "objeto'
+                // prop não é o objeto, e sim as informações (propriedades) dele. Para os valores de uma instância, deve-se passá-la por parâmetro
                 separador = ";";
             }
             return retorno;
