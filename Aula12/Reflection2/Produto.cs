@@ -10,5 +10,11 @@ namespace Reflection2
         public string Descricao { get; set; }
         public double Preco { get; set; }
 
+        public void TornarDescricaoMaiuscula()
+        {
+            Descricao = Descricao.ToUpper();
+        }
+        // ou public void TornarDescricaoMaiuscula() => Descricao = Descricao.ToUpper();
+
     }
 }

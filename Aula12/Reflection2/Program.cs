@@ -22,7 +22,17 @@ namespace Reflection2
             Console.WriteLine($"Linha CSV: {RetornarLinhaCsv(objeto1, "Codigo;Descricao")}"); // Linha CSV: 1;Coca-Cola 1L
             // passa os campos de retorno
 
+
+
+            var metodo = tipo.GetMethod("TornarDescricaoMaiuscula"); // chamar um método pelo nome dele. Também é Reflection
+            metodo.Invoke(objeto1, null); // null pois não tem parâmetros
+            Console.WriteLine($"Descricao após chamar o método: {objeto1.Descricao}");
+
+
+
             Console.ReadLine();
+
+
         }
 
         private static string RetornarLinhaCsv<T>(T objeto, string camposSeparadosPorPontoEVirgula)
