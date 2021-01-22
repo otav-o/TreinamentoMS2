@@ -7,12 +7,18 @@ namespace Reflection
         static void Main(string[] args)
         {
 
-            var obj = new Produto { Codigo = 1, Descricao = "Coca-cola", Preco = 5.5 };
+            var produto = new Produto { Codigo = 1, Descricao = "Coca-cola", Preco = 5.5 };
 
-            var tipo = obj.GetType(); // como a classe não herda de ninguém, ela herda de Object
-                // pega o tipo do objeto mesmo (Produto) e não o da variável obj (Object)
+            Console.WriteLine($"Produto: {RetornarLinhaCsv<Produto>(produto)}");
 
-            ImprimirTipo(obj);
+            var cliente = new Cliente { Nome = "Ana", Email = "ana@email.com" };
+
+            Console.WriteLine($"Cliente: {RetornarLinhaCsv<Cliente>(cliente)}");
+
+            //var tipo = produto.GetType(); // como a classe não herda de ninguém, ela herda de Object
+            //    // pega o tipo do objeto mesmo (Produto) e não o da variável obj (Object)
+
+            //ImprimirTipo(produto);
 
 
 
@@ -26,7 +32,18 @@ namespace Reflection
 
             Console.ReadKey();
         }
-
+        private static string RetornarLinhaCsv<T>(T objeto)
+        {
+            string retorno = "";
+            var tipo = typeof(T);
+            var separador = "";
+            foreach (var prop in tipo.GetProperties()) // para cada propriedade
+            {
+                retorno += separador + prop.GetValue(objeto); // pega o valor desta propriedade em "objeto'
+                separador = ";";
+            }
+            return retorno;
+        }
         private static void ImprimirTipo (Produto obj)
         {
             var tipo = obj.GetType();
