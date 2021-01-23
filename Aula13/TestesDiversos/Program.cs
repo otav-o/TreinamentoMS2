@@ -6,7 +6,9 @@ namespace TestesDiversos
     {
         static void Main(string[] args)
         {
-            var dataInicial = new DateTime(2020, 1, 19, 20, 21, 22);
+            var dataInicial = DateTime.Now;
+            Console.WriteLine("Tecle <Enter> o mais rápido possível");
+            Console.ReadKey();
             var dataFinal = DateTime.Now;
 
             TimeSpan intervaloDeTempo = (dataFinal - dataInicial); // TimeSpan: intervalo de tempo
@@ -14,7 +16,7 @@ namespace TestesDiversos
             Console.WriteLine($"Data inicial: {dataInicial.ToShortDateString()} {dataInicial.ToLongTimeString()}");
             Console.WriteLine($"Data final: {dataFinal.ToShortDateString()} {dataFinal.ToLongTimeString()}");
 
-            Console.WriteLine($"Diferença em anos: {intervaloDeTempo.TotalDays}");
+            Console.WriteLine($"Diferença em segundos: {intervaloDeTempo.TotalSeconds}");
         }
     }
 }
