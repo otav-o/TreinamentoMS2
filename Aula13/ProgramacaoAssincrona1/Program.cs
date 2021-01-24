@@ -53,7 +53,7 @@ namespace ProgramacaoAssincrona1
 
             Task.WaitAll(resultados); // dá um Wait em cada uma das tarefas (aguarda o término delas, pausa a execução)
 
-            tot = resultados.Sum(x => x.Result); // toda Task tem um Result - é uma propriedade (não dá para somar tasks)
+            tot = resultados.Sum(x => x.Result); // toda Task tem um Result - é uma propriedade (não dá para somar tasks). Resultado da tarefa
 
             Console.WriteLine($"Assíncrono com Task: {(DateTime.Now - inicio).TotalSeconds} segundos");
 
