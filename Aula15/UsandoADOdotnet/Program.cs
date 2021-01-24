@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Data;
 using System.Data.SqlClient;
 
 namespace UsandoADOdotnet
@@ -21,11 +22,25 @@ namespace UsandoADOdotnet
             {
                 conexao.Open();
 
-                var sqlInserir = "insert into produto (id_produto, codigo, descricao, preco) values ('ABF', 4, 'Batata Frita', 35.5)";
-                var cmdInserir = new SqlCommand(sqlInserir, conexao);
-                cmdInserir.ExecuteNonQuery(); // executa um comando sem retorno (insert, delete, update)
+                //var sqlInserir = "insert into produto (id_produto, codigo, descricao, preco) values ('ABF', 4, 'Batata Frita', 35.5)";
+                //var cmdInserir = new SqlCommand(sqlInserir, conexao);
+                //cmdInserir.ExecuteNonQuery(); // executa um comando sem retorno (insert, delete, update)
 
+                var cmd = new SqlCommand("select * from produto", conexao);
+                var da = new SqlDataAdapter(cmd); // preenche o dataset quando chama o .Fill()
+                DataSet ds = new DataSet(); // classe padrão para todos os bancos
+
+                da.Fill(ds); // da executa o comando cmd na conexão e retorna no ds
                 conexao.Close();
+
+                foreach (DataRow reg in ds.Tables[0].Rows) // pega as linhas da primeira tabela (0)
+                {
+                    Console.Write($"{reg["id_produto"]}");
+                    Console.WriteLine($"{reg["codigo"]}, {reg["preco"]:C2}");
+                    Console.Write($"{reg["descricao"]}");
+                }
+
+                // para preencher um DS, precisa-se de um DataAdapter (que sabe executar comandos no SQL)
             }
             Console.WriteLine("Fim do programa");
         }
