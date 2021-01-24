@@ -13,6 +13,27 @@ namespace ProgramacaoAssincrona1
             Console.WriteLine($"Número: {ProcessamentoSincrono()} raízes inteiras de 0 a 1 bilhão."); // demorou cerca de 8 segundos para processar de forma síncrona
             Console.WriteLine($"Número: {ProcessamentoAssincrono()}"); // 2.5 segundos!
             Console.WriteLine($"Número: {ProcessamentoAssincronoUsandoTask()}"); // 3.5s
+            Console.WriteLine($"Número: {ProcessamentoAssincronoUsandoPLinq()}");
+        }
+
+        private static int ProcessamentoAssincronoUsandoPLinq()
+        {
+            var inicio = DateTime.Now;
+            var div = MAX / NUMERO_THREADS;
+
+            int tot = Enumerable.Range(0, NUMERO_THREADS).AsParallel().Sum((index) => Processamento(index * div, (index + 1) * div));
+            // Enumerable.Range(start, numero_de_inteiros_sequenciais). É um vetor {0, 1, 2, 3, 4, 5, 6, 7, 8, 9}
+            // AsParallel() - implementado no Linq, permite querys (consultas Linq) paralelas. Só compensa se o trabalho for grande
+            // index: número entre 0 e 9 (0 e NUMERO_THREADS), recebido por parâmetro.
+            // Sum() do retorno do processamento (em que é passado cada elemento do vetor)
+
+            //int tot = Enumerable.Range(0, NUMERO_THREADS).Sum((index) => Processamento(index * div, (index + 1) * div)); // sem o AsParallel() demora 9 segundos
+
+
+            Console.WriteLine($"Assíncrono com PLinq: {(DateTime.Now - inicio).TotalSeconds} segundos");
+
+            return tot;
+
         }
 
         private static int ProcessamentoAssincrono()
