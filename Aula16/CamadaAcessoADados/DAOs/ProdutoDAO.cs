@@ -10,7 +10,10 @@ namespace CamadaAcessoADados.DAOs
     {
         public void Inserir(Produto produto)
         {
-            using(var conexao = new SqlConnection(strConexao))
+            if (produto.ProdutoId == null)
+                produto.ProdutoId = Guid.NewGuid().ToString(); // geração de número único no mundo
+                                                               // melhor do que o id auto-increment pois precisaria buscar o último id gerado
+            using (var conexao = new SqlConnection(strConexao))
             {
                 conexao.Open();
                 var sql = "insert into produto " +
@@ -31,6 +34,24 @@ namespace CamadaAcessoADados.DAOs
         }
         public void Atualizar(Produto produto)
         {
+            using (var conexao = new SqlConnection(strConexao))
+            {
+                conexao.Open();
+                var sql = "update produto " +
+                    " set codigo=@codigo, descricao=@descricao, preco=@preco)" +
+                    " where id_produto=@id_produto";
+
+                var cmd = new SqlCommand(sql, conexao); // cria o command
+
+                cmd.Parameters.AddWithValue("id_produto", produto.ProdutoId); // adiciona o id do objeto produto como parâmetro @id_produto
+                cmd.Parameters.AddWithValue("codigo", produto.Codigo);
+                cmd.Parameters.AddWithValue("descricao", produto.Descricao);
+                cmd.Parameters.AddWithValue("preco", produto.Preco);
+
+                cmd.ExecuteNonQuery();
+
+                conexao.Close();
+            }
 
         }
         public void Excluir(Produto produto)
