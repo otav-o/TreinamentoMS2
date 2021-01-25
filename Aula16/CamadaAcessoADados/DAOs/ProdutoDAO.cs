@@ -15,9 +15,9 @@ namespace CamadaAcessoADados.DAOs
             if (produto.ProdutoId == null)
                 produto.ProdutoId = Guid.NewGuid().ToString(); // geração de número único no mundo
                                                                // melhor do que o id auto-increment pois precisaria buscar o último id gerado
-            var sql = "insert into produto " +
-                "(id_produto, codigo, descricao, preco)" +
-                "values(@id_produto, @codigo, @descricao, @preco)";
+            var sql = "insert into produto" +
+                " (id_produto, codigo, descricao, preco)" +
+                " values(@id_produto, @codigo, @descricao, @preco)";
 
             ExecutarComando(sql, produto, AdicionarParametrosTodos);
 
@@ -25,8 +25,8 @@ namespace CamadaAcessoADados.DAOs
         public void Atualizar(Produto produto)
         {
 
-            var sql = "update produto " +
-                " set codigo=@codigo, descricao=@descricao, preco=@preco)" +
+            var sql = "update produto" +
+                " set codigo=@codigo, descricao=@descricao, preco=@preco" +
                 " where id_produto=@id_produto";
 
             ExecutarComando(sql, produto, AdicionarParametrosTodos);
@@ -42,7 +42,7 @@ namespace CamadaAcessoADados.DAOs
         public Produto RetornarPorId(string id)
         {
             string sql = "select * from produto" +
-                "where id_produto = @id";
+                " where id_produto=@id_produto";
 
             var parametros = new SqlParameter[]
             {
@@ -78,7 +78,7 @@ namespace CamadaAcessoADados.DAOs
 
                 var registros = new DataTable();
 
-                var da = new SqlDataAdapter(cmd);
+                var da = new SqlDataAdapter(cmd); 
 
                 da.Fill(registros); // da preenche o DataTable
 
