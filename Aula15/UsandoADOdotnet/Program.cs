@@ -26,21 +26,42 @@ namespace UsandoADOdotnet
                 //var cmdInserir = new SqlCommand(sqlInserir, conexao);
                 //cmdInserir.ExecuteNonQuery(); // executa um comando sem retorno (insert, delete, update)
 
-                var cmd = new SqlCommand("select * from produto", conexao);
-                var da = new SqlDataAdapter(cmd); // preenche o dataset quando chama o .Fill()
-                DataSet ds = new DataSet(); // classe padrão para todos os bancos
+                // --
 
-                da.Fill(ds); // da executa o comando cmd na conexão e retorna no ds
-                conexao.Close();
+                //var cmd = new SqlCommand("select * from produto", conexao);
+                //var da = new SqlDataAdapter(cmd); // preenche o dataset quando chama o .Fill()
+                //DataSet ds = new DataSet(); // classe padrão para todos os bancos
 
-                foreach (DataRow reg in ds.Tables[0].Rows) // pega as linhas da primeira tabela (0)
+                //da.Fill(ds); // da executa o comando cmd na conexão e retorna no ds
+                //conexao.Close();
+
+                //foreach (DataRow reg in ds.Tables[0].Rows) // pega as linhas da primeira tabela (0)
+                //{
+                //    Console.Write($"{reg["id_produto"]}");
+                //    Console.WriteLine($"{reg["codigo"]}, {reg["preco"]:C2}");
+                //    Console.Write($"{reg["descricao"]}");
+                //}
+
+                //// para preencher um DS, precisa-se de um DataAdapter (que sabe executar comandos no SQL)
+
+                // --
+
+                Console.WriteLine("Informe parte da descrição do produto desejado: ");
+                var parteDescricao = Console.ReadLine();
+                var sqlQuery = $"select * from produto where descricao like '%{parteDescricao}%'";
+                // concatenar strings do usuário: falha de segurança ex.: ';delete from produto where codigo = 4--
+                var cmd = new SqlCommand(sqlQuery, conexao);
+                var da = new SqlDataAdapter(cmd);
+                var dt = new DataTable();
+                da.Fill(dt);
+
+                foreach (DataRow reg in dt.Rows)
                 {
-                    Console.Write($"{reg["id_produto"]}");
-                    Console.WriteLine($"{reg["codigo"]}, {reg["preco"]:C2}");
-                    Console.Write($"{reg["descricao"]}");
+                    Console.Write($"{reg["id_produto"]}, ");
+                    Console.WriteLine($"{reg["codigo"]}, {reg["descricao"]}, {reg["preco"]:C2}");
                 }
 
-                // para preencher um DS, precisa-se de um DataAdapter (que sabe executar comandos no SQL)
+                conexao.Close();
             }
             Console.WriteLine("Fim do programa");
         }
