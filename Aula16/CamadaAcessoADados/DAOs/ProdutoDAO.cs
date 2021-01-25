@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
+using System.Linq;
 using System.Text;
 
 namespace CamadaAcessoADados.DAOs
@@ -44,6 +45,8 @@ namespace CamadaAcessoADados.DAOs
                 "where id_produto = @id";
             using (var conexao = new SqlConnection(strConexao))
             {
+                conexao.Open();
+
                 var cmd = new SqlCommand(sql, conexao);
                 cmd.Parameters.AddWithValue("id_produto", id);
 
@@ -68,11 +71,52 @@ namespace CamadaAcessoADados.DAOs
 
                 return obj; // retorna o produto
             }
-            
         }
         public IEnumerable<Produto> RetornarPorParteNome(string parteNome)
         {
             throw new NotImplementedException();
+        }
+
+        private IEnumerable<Produto> ExecutarConsulta(string sql, IEnumerable<SqlParameter> parametros)
+        {
+            using (var conexao = new SqlConnection(strConexao))
+            {
+                conexao.Open();
+
+                var cmd = new SqlCommand(sql, conexao);
+
+                cmd.Parameters.AddRange(parametros.ToArray());
+
+                var registros = new DataTable();
+
+                var da = new SqlDataAdapter(cmd);
+
+                da.Fill(registros); // da preenche o DataTable
+
+                conexao.Close();
+
+                return DeserializarTabela(registros); // função que recebe o dataTable e retorna uma lista de produtos
+            }
+        }
+        private IEnumerable<Produto> DeserializarTabela(DataTable regs)
+        {
+            var objetos = new List<Produto>();
+            foreach (DataRow reg in regs.Rows)
+            {
+                objetos.Add(DeserializarLinha(reg));
+                
+            }
+            return objetos;
+        }
+        private Produto DeserializarLinha(DataRow reg)
+        {
+            var obj = new Produto();
+            obj.ProdutoId = reg["id_produto"].ToString(); // converter para string pois DT retorna um object
+            obj.Codigo = Convert.ToInt32(reg["codigo"]); // ou registros.Rows[0]
+            obj.Descricao = reg["descricao"].ToString();
+            obj.Preco = Convert.ToDouble(reg["preco"]);
+
+            return obj;
         }
         private void ExecutarComando(string sql, Produto obj, Action<SqlCommand, Produto> AdicionarParametros)
         {
