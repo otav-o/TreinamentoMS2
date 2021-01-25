@@ -22,9 +22,13 @@ namespace UsandoADOdotnet
             {
                 conexao.Open();
 
-                //var sqlInserir = "insert into produto (id_produto, codigo, descricao, preco) values ('ABF', 4, 'Batata Frita', 35.5)";
-                //var cmdInserir = new SqlCommand(sqlInserir, conexao);
-                //cmdInserir.ExecuteNonQuery(); // executa um comando sem retorno (insert, delete, update)
+                var sqlInserir = "insert into produto (id_produto, codigo, descricao, preco) values (@id_produto, @codigo, @descricao, @preco)";
+                var cmdInserir = new SqlCommand(sqlInserir, conexao);
+                cmdInserir.Parameters.AddWithValue("id_produto", "ABD");
+                cmdInserir.Parameters.AddWithValue("codigo", 5);
+                cmdInserir.Parameters.AddWithValue("descricao", "Batata Frita");
+                cmdInserir.Parameters.AddWithValue("preco", 35.5);
+                cmdInserir.ExecuteNonQuery(); // executa um comando sem retorno (insert, delete, update)
 
                 // --
 
