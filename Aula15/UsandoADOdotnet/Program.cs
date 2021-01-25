@@ -48,9 +48,15 @@ namespace UsandoADOdotnet
 
                 Console.WriteLine("Informe parte da descrição do produto desejado: ");
                 var parteDescricao = Console.ReadLine();
-                var sqlQuery = $"select * from produto where descricao like '%{parteDescricao}%'";
+
+                //var sqlQuery = $"select * from produto where descricao like '%{parteDescricao}%'";
                 // concatenar strings do usuário: falha de segurança ex.: ';delete from produto where codigo = 4--
+
+                var sqlQuery = $"select * from produto where descricao like @texto_like"; // @ indica que é um parâmetro
+
                 var cmd = new SqlCommand(sqlQuery, conexao);
+                cmd.Parameters.AddWithValue("texto_like", "%" + parteDescricao + "%"); // o parâmetro vai separado para o banco, ele não confunde com instrução
+
                 var da = new SqlDataAdapter(cmd);
                 var dt = new DataTable();
                 da.Fill(dt);
