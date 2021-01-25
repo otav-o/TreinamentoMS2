@@ -9,12 +9,28 @@ namespace EntityFrameworkTestes
     {
         static void Main(string[] args)
         {
-            //IncluirProdutos();
+            IncluirProdutos();
             //AlterarProduto();
-            ExcluirProduto();
+            //ExcluirProduto();
+
+            //ImprimirComPrecoMaiorQue(3); // consulta
 
             Console.WriteLine("Fim do programa");
             Console.ReadKey();
+        }
+
+        private static void ImprimirComPrecoMaiorQue(double preco)
+        {
+            using (var db = new PedidosContext())
+            {
+                //var produtos = db.Produtos.Where(x => x.Preco > preco);
+                var produtos = from x in db.Produtos where x.Preco > preco select x;
+
+                foreach (var p in produtos)
+                {
+                    Console.WriteLine($"{p.Codigo} - {p.Descricao} - {p.Preco:N2}");
+                }
+            }
         }
 
         private static void ExcluirProduto()
