@@ -43,41 +43,30 @@ namespace CamadaAcessoADados.DAOs
         {
             string sql = "select * from produto" +
                 "where id_produto = @id";
-            using (var conexao = new SqlConnection(strConexao))
+
+            var parametros = new SqlParameter[]
             {
-                conexao.Open();
+                new SqlParameter("id_produto", id)
+            };
 
-                var cmd = new SqlCommand(sql, conexao);
-                cmd.Parameters.AddWithValue("id_produto", id);
+            var resultados = ExecutarConsulta(sql, parametros);
 
-                var registros = new DataTable();
+            if (resultados.Count == 0) // se não encontrar um produto
+                return null;
 
-                var da = new SqlDataAdapter(cmd);
+            return resultados[0];
 
-                da.Fill(registros); // da preenche o DataTable
-
-                conexao.Close();
-
-                if (registros.Rows.Count == 0) // se não encontrar um produto
-                    return null;
-
-                var primeiraLinha = registros.Rows[0];
-
-                var obj = new Produto();
-                obj.ProdutoId = registros.Rows[0]["id_produto"].ToString(); // converter para string pois DT retorna um object
-                obj.Codigo = Convert.ToInt32(primeiraLinha["codigo"]); // ou registros.Rows[0]
-                obj.Descricao = primeiraLinha["descricao"].ToString();
-                obj.Preco = Convert.ToDouble(registros.Rows[0]["preco"]);
-
-                return obj; // retorna o produto
-            }
         }
-        public IEnumerable<Produto> RetornarPorParteNome(string parteNome)
+        public IList<Produto> RetornarPorParteDescricao(string parteDescricao)
         {
-            throw new NotImplementedException();
+            var sql = "select * from produto where descricao like @descricao";
+
+            var parametros = new SqlParameter[] { new SqlParameter("Descricao", "%" + parteDescricao + "%") };
+
+            return ExecutarConsulta(sql, parametros);
         }
 
-        private IEnumerable<Produto> ExecutarConsulta(string sql, IEnumerable<SqlParameter> parametros)
+        private IList<Produto> ExecutarConsulta(string sql, IEnumerable<SqlParameter> parametros)
         {
             using (var conexao = new SqlConnection(strConexao))
             {
@@ -98,7 +87,7 @@ namespace CamadaAcessoADados.DAOs
                 return DeserializarTabela(registros); // função que recebe o dataTable e retorna uma lista de produtos
             }
         }
-        private IEnumerable<Produto> DeserializarTabela(DataTable regs)
+        private IList<Produto> DeserializarTabela(DataTable regs)
         {
             var objetos = new List<Produto>();
             foreach (DataRow reg in regs.Rows)
