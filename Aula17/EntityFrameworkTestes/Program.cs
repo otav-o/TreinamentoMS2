@@ -1,6 +1,8 @@
 ﻿using EntityFrameworkTestes.DAL;
 using EntityFrameworkTestes.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace EntityFrameworkTestes
@@ -9,14 +11,74 @@ namespace EntityFrameworkTestes
     {
         static void Main(string[] args)
         {
-            IncluirProdutos();
+            //IncluirProdutos();
             //AlterarProduto();
             //ExcluirProduto();
-
             //ImprimirComPrecoMaiorQue(3); // consulta
+            AdicionarRegistros();
 
             Console.WriteLine("Fim do programa");
             Console.ReadKey();
+        }
+        private static void ImprimirProdutos()
+        {
+            using (var db = new PedidosContext())
+            {
+                var pedidos = db.Pedidos.Include(y => y.Itens); // importante para não dar erro
+                foreach (var p in pedidos)
+                {
+                    Console.WriteLine($"{p.Numero}"); // - {p.Cliente.Nome}");
+                    foreach (var item in p.Itens)
+                    {
+                        Console.WriteLine($"Total do pedido: {p.Total} - ");
+                    }
+                }
+            }
+        }
+        private static void AdicionarRegistros()
+        {
+            using (var db = new PedidosContext())
+            {
+                var c1 = new Cliente { ClienteId = "Cliente1", Nome = "Cliente 1", Email = "cliente1@gmail.com" };
+                var c2 = new Cliente { ClienteId = "Cliente2", Nome = "Cliente 2", Email = "cliente2@gmail.com" };
+
+                db.Clientes.AddRange(c1, c2);
+                db.SaveChanges();
+
+                var p1 = new Pedido
+                {
+                    PedidoId = "Pedido1",
+                    Numero = 1,
+                    Cliente = c1,
+                    Itens = new List<PedidoItem>
+                    {
+                        new PedidoItem { PedidoItemId = "PedidoItem1", PedidoId = "Pedido1", Produto = RetornaProdutoPorId(db, "Produto1"), Quantidade = 5},
+                        new PedidoItem { PedidoItemId = "PedidoItem2", PedidoId = "Pedido1", Produto = RetornaProdutoPorId(db, "Produto2"), Quantidade = 4}
+                    }
+                };
+
+                var p2 = new Pedido
+                {
+                    PedidoId = "Pedido1",
+                    Numero = 2,
+                    Cliente = c2,
+                    Itens = new List<PedidoItem>
+                    {
+                        new PedidoItem { PedidoItemId = "PedidoItem3", PedidoId = "Pedido2", Produto = RetornaProdutoPorId(db, "Produto3"), Quantidade = 5},
+                        new PedidoItem { PedidoItemId = "PedidoItem4", PedidoId = "Pedido2", Produto = RetornaProdutoPorId(db, "Produto4"), Quantidade = 4},
+                        new PedidoItem { PedidoItemId = "PedidoItem5", PedidoId = "Pedido2", Produto = RetornaProdutoPorId(db, "Produto5"), Quantidade = 4}
+                    }
+                };
+                
+
+                db.Pedidos.AddRange(p1, p2); // mesmo adicionando só pedidos, a tabela itens também é preenchida
+                db.SaveChanges();
+            }
+        }
+
+        static Produto RetornaProdutoPorId(PedidosContext db, string id)
+        {
+            return db.Produtos.Where(x => x.ProdutoId == id).FirstOrDefault();
         }
 
         private static void ImprimirComPrecoMaiorQue(double preco)
