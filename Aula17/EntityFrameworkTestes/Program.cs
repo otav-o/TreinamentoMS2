@@ -24,14 +24,18 @@ namespace EntityFrameworkTestes
         {
             using (var db = new PedidosContext())
             {
-                var pedidos = db.Pedidos.Include(y => y.Itens); // importante para não dar erro
+                var pedidos = db.Pedidos.Include(a => a.Cliente).Include(y => y.Itens).ThenInclude(b => b.Produto); // passa uma função com o que quer ser incluído
+                // incluir clientes, itens e, para cada item, os produtos.
+                // só seleciona na primeira iteração (no foreach abaixo). Obs.: colocar ToArray() para executar o comando imediatamente
+                // também poderia carregar os pedidos e depois carregar os itens em uma segunda consulta (cuidado para não deixar conexão aberta)
                 foreach (var p in pedidos)
                 {
-                    Console.WriteLine($"{p.Numero}"); // - {p.Cliente.Nome}");
+                    Console.WriteLine($"{p.Numero} - {p.Cliente.Nome}");
                     foreach (var item in p.Itens)
                     {
-                        Console.WriteLine($"Total do pedido: {p.Total} - ");
+                        Console.WriteLine($"    {item.Produto.Descricao, 20}");
                     }
+                    Console.WriteLine($"Total do pedido: {p.Total} - ");
                 }
             }
         }
