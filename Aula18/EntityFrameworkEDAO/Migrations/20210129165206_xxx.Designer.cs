@@ -3,14 +3,16 @@ using EntityFrameworkEDAO.DAL__Data_Access_Layer_;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace EntityFrameworkEDAO.Migrations
 {
     [DbContext(typeof(PedidosContext))]
-    partial class PedidosContextModelSnapshot : ModelSnapshot
+    [Migration("20210129165206_xxx")]
+    partial class xxx
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -61,7 +63,7 @@ namespace EntityFrameworkEDAO.Migrations
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("ProdutoId")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<double>("Quantidade")
                         .HasColumnType("float");
@@ -69,6 +71,8 @@ namespace EntityFrameworkEDAO.Migrations
                     b.HasKey("PedidoItemId");
 
                     b.HasIndex("PedidoId");
+
+                    b.HasIndex("ProdutoId");
 
                     b.ToTable("PedidoItens");
                 });
@@ -98,6 +102,12 @@ namespace EntityFrameworkEDAO.Migrations
                     b.HasOne("EntityFrameworkEDAO.Models.Pedido", null)
                         .WithMany("Itens")
                         .HasForeignKey("PedidoId");
+
+                    b.HasOne("EntityFrameworkEDAO.Models.Produto", "Produto")
+                        .WithMany()
+                        .HasForeignKey("ProdutoId");
+
+                    b.Navigation("Produto");
                 });
 
             modelBuilder.Entity("EntityFrameworkEDAO.Models.Pedido", b =>

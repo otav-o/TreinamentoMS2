@@ -3,14 +3,16 @@ using EntityFrameworkEDAO.DAL__Data_Access_Layer_;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace EntityFrameworkEDAO.Migrations
 {
     [DbContext(typeof(PedidosContext))]
-    partial class PedidosContextModelSnapshot : ModelSnapshot
+    [Migration("20210129171139_xxxy")]
+    partial class xxxy
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
