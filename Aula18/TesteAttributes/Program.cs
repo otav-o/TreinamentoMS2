@@ -12,6 +12,12 @@ namespace TesteAttributes
 
             Imprimir(cli);
 
+            Imprimir(new { Teste = "123", OQueEhIsso = 1, EhSerioIsso = true });
+
+            var prod = new Produto { Codigo = 1, Descricao = "Coca-Cola", Preco = 5.5 };
+
+            Imprimir(prod);
+
             Console.ReadKey();
         }
 
