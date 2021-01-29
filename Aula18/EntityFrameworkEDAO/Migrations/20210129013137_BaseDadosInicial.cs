@@ -2,7 +2,7 @@
 
 namespace EntityFrameworkEDAO.Migrations
 {
-    public partial class VersaoInicial : Migration
+    public partial class BaseDadosInicial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -12,7 +12,7 @@ namespace EntityFrameworkEDAO.Migrations
                 {
                     ClienteId = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     Nome = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Email = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    Endereco_Eletronico = table.Column<string>(type: "varchar(10)", maxLength: 10, nullable: true)
                 },
                 constraints: table =>
                 {
@@ -25,7 +25,7 @@ namespace EntityFrameworkEDAO.Migrations
                 {
                     ProdutoId = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     Codigo = table.Column<int>(type: "int", nullable: false),
-                    Descricao = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Descricao = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Preco = table.Column<double>(type: "float", nullable: false)
                 },
                 constraints: table =>

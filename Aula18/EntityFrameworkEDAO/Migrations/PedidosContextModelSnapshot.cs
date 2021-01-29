@@ -24,7 +24,9 @@ namespace EntityFrameworkEDAO.Migrations
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Email")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(10)
+                        .HasColumnType("varchar(10)")
+                        .HasColumnName("Endereco_Eletronico");
 
                     b.Property<string>("Nome")
                         .HasColumnType("nvarchar(max)");
@@ -84,6 +86,7 @@ namespace EntityFrameworkEDAO.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Descricao")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<double>("Preco")
