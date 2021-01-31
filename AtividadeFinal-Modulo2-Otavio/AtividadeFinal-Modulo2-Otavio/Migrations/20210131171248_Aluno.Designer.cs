@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AtividadeFinal_Modulo2_Otavio.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    [Migration("20210131161204_Aluno")]
+    [Migration("20210131171248_Aluno")]
     partial class Aluno
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -72,7 +72,7 @@ namespace AtividadeFinal_Modulo2_Otavio.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Endereco");
+                    b.ToTable("Enderecos");
                 });
 
             modelBuilder.Entity("AtividadeFinal_Modulo2_Otavio.Models.Aluno", b =>

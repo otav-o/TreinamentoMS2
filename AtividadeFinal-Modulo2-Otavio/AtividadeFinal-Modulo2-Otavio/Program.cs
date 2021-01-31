@@ -14,13 +14,19 @@ namespace AtividadeFinal_Modulo2_Otavio
         }
 
 
-        private static void Cadastrar<T> (T obj)
+        //private static void Cadastrar<T> (T obj)
+        //{
+        //    using (var context = new ApplicationContext())
+        //    {
+        //        context.Add(obj);
+        //        context.SaveChanges();
+        //    }
+        //}
+
+        private static void Cadastrar<T>(T obj)
         {
-            using (var context = new ApplicationContext())
-            {
-                context.Add(obj);
-                context.SaveChanges();
-            }
+            DAOGenerica<T> dao = new DAOGenerica<T>();
+            dao.Inserir(obj);
         }
 
         //private static void MenuPrincipal()

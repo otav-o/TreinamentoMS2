@@ -9,6 +9,7 @@ namespace AtividadeFinal_Modulo2_Otavio.DAL
     public class ApplicationContext : DbContext
     {
         public DbSet<Aluno> Alunos { get; set; }
+        public DbSet<Endereco> Enderecos { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

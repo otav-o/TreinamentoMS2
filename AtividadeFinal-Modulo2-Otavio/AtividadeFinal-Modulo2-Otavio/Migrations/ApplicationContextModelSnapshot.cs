@@ -70,7 +70,7 @@ namespace AtividadeFinal_Modulo2_Otavio.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Endereco");
+                    b.ToTable("Enderecos");
                 });
 
             modelBuilder.Entity("AtividadeFinal_Modulo2_Otavio.Models.Aluno", b =>

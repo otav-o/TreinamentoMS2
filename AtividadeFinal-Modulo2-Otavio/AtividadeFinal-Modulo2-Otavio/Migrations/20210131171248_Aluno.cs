@@ -7,7 +7,7 @@ namespace AtividadeFinal_Modulo2_Otavio.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Endereco",
+                name: "Enderecos",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -21,7 +21,7 @@ namespace AtividadeFinal_Modulo2_Otavio.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Endereco", x => x.Id);
+                    table.PrimaryKey("PK_Enderecos", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -38,9 +38,9 @@ namespace AtividadeFinal_Modulo2_Otavio.Migrations
                 {
                     table.PrimaryKey("PK_Alunos", x => x.Matricula);
                     table.ForeignKey(
-                        name: "FK_Alunos_Endereco_EnderecoId",
+                        name: "FK_Alunos_Enderecos_EnderecoId",
                         column: x => x.EnderecoId,
-                        principalTable: "Endereco",
+                        principalTable: "Enderecos",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
@@ -57,7 +57,7 @@ namespace AtividadeFinal_Modulo2_Otavio.Migrations
                 name: "Alunos");
 
             migrationBuilder.DropTable(
-                name: "Endereco");
+                name: "Enderecos");
         }
     }
 }
