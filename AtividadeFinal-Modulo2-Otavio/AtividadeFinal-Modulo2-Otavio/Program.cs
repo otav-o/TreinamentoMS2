@@ -23,6 +23,29 @@ namespace AtividadeFinal_Modulo2_Otavio
             }
         }
 
+        //private static void MenuPrincipal()
+        //{
+        //    Console.Write("GERENCIADOR DE ALUNOS" +
+        //        "\n[1] Inserir aluno" +
+        //        "\n[2] Alterar aluno" +
+        //        "\n[3] Excluir aluno" +
+        //        "\n[4] Consultar aluno por matrícula" +
+        //        "\n[5] Consultar aluno por parte do nome" +
+        //        "\n Digite o número da opção desejada: ");
+        //    var resp = Console.ReadLine();
+        //    switch (resp)
+        //    {
+        //        case "1": InserirAlunoMenu(); break;
+        //        case "2": AlterarAlunoMenu(); break;
+        //        case "3": ExcluirAlunoMenu(); break;
+        //        case "4": ConsultarAlunoMatricula(); break;
+        //        case "5": ConsultarAlunoParteNome(); break;
+        //        default:
+        //            Console.WriteLine("Opção inválida!");
+        //            MenuPrincipal();
+        //            break;
+        //    }
+        //}
         private static void InserirAlunoMenu()
         {
             Console.WriteLine("--- Cadastro de aluno ---");
@@ -41,11 +64,7 @@ namespace AtividadeFinal_Modulo2_Otavio
             if (resp == 's')
                 InserirEnderecoMenu(obj);
 
-
             Cadastrar<Aluno>(obj);
-
-
-
         }
 
         private static void InserirEnderecoMenu(Aluno obj)
