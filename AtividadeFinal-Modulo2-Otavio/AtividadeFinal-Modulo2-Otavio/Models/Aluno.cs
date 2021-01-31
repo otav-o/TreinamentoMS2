@@ -13,6 +13,5 @@ namespace AtividadeFinal_Modulo2_Otavio.Models
         // matricula é definida como unique em ApplicationContext
         public string Nome { get; set; }
         public string Email { get; set; }
-        public Endereco Endereco { get; set; } 
     }
 }

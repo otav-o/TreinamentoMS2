@@ -12,5 +12,6 @@
         public int Complemento { get; set; }
         public string Bairro { get; set; }
         public string Cidade { get; set; }
+        public Aluno Aluno { get; set; }
     }
 }

@@ -41,7 +41,7 @@ namespace AtividadeFinal_Modulo2_Otavio
                 Console.Write("Deseja inserir outro endereço? ");
                 resp = Console.ReadLine().Trim().ToLower()[0];
             }
-            Cadastrar<Aluno>(obj);
+            //Cadastrar<Aluno>(obj);
         }
 
         private static void InserirEnderecoMenu(Aluno obj)
@@ -67,10 +67,9 @@ namespace AtividadeFinal_Modulo2_Otavio
             Console.Write("      Cidade: ");
             end.Cidade = Console.ReadLine();
 
-            Cadastrar<Endereco>(end);
 
-            // TODO associar um aluno a um endereço
-
+            end.Aluno = obj;
+            Cadastrar<Endereco>(end); // já insere aluno na tabela Alunos
         }
     }
 }

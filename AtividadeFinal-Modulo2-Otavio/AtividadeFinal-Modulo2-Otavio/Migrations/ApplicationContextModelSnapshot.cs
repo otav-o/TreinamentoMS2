@@ -29,9 +29,6 @@ namespace AtividadeFinal_Modulo2_Otavio.Migrations
                     b.Property<string>("Email")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("EnderecoId")
-                        .HasColumnType("int");
-
                     b.Property<int>("Matricula")
                         .HasColumnType("int");
 
@@ -39,8 +36,6 @@ namespace AtividadeFinal_Modulo2_Otavio.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("EnderecoId");
 
                     b.HasIndex("Matricula")
                         .IsUnique();
@@ -54,6 +49,9 @@ namespace AtividadeFinal_Modulo2_Otavio.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .UseIdentityColumn();
+
+                    b.Property<int?>("AlunoId")
+                        .HasColumnType("int");
 
                     b.Property<string>("Bairro")
                         .HasColumnType("nvarchar(max)");
@@ -75,16 +73,18 @@ namespace AtividadeFinal_Modulo2_Otavio.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("AlunoId");
+
                     b.ToTable("Enderecos");
                 });
 
-            modelBuilder.Entity("AtividadeFinal_Modulo2_Otavio.Models.Aluno", b =>
+            modelBuilder.Entity("AtividadeFinal_Modulo2_Otavio.Models.Endereco", b =>
                 {
-                    b.HasOne("AtividadeFinal_Modulo2_Otavio.Models.Endereco", "Endereco")
+                    b.HasOne("AtividadeFinal_Modulo2_Otavio.Models.Aluno", "Aluno")
                         .WithMany()
-                        .HasForeignKey("EnderecoId");
+                        .HasForeignKey("AlunoId");
 
-                    b.Navigation("Endereco");
+                    b.Navigation("Aluno");
                 });
 #pragma warning restore 612, 618
         }
