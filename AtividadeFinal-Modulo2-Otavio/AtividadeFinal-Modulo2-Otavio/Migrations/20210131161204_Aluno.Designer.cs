@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AtividadeFinal_Modulo2_Otavio.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    [Migration("20210131140659_Aluno")]
+    [Migration("20210131161204_Aluno")]
     partial class Aluno
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
