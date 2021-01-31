@@ -1,4 +1,5 @@
-﻿using AtividadeFinal_Modulo2_Otavio.Models;
+﻿using AtividadeFinal_Modulo2_Otavio.DAL;
+using AtividadeFinal_Modulo2_Otavio.Models;
 using System;
 
 namespace AtividadeFinal_Modulo2_Otavio
@@ -7,7 +8,13 @@ namespace AtividadeFinal_Modulo2_Otavio
     {
         static void Main(string[] args)
         {
-            Console.ReadLine();
+            using (var context = new ApplicationContext())
+            {
+                context.Add(new Aluno { Email = "aluno@gmail.com", Nome = "Camillo" });
+                context.SaveChanges();
+            }
+
+            Console.WriteLine("Fim do programa");
         }
 
         private static void InserirAlunoMenu()

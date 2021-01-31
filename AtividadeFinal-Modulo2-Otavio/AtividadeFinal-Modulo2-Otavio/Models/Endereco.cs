@@ -2,6 +2,7 @@
 {
     public class Endereco
     {
+        public int Id { get; set; }
         /// <summary>
         /// Indica se o endereço é residencial, comercial, de cobrança, etc.
         /// </summary>
