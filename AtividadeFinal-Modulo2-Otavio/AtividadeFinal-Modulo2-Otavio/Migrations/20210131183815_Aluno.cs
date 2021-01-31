@@ -28,15 +28,16 @@ namespace AtividadeFinal_Modulo2_Otavio.Migrations
                 name: "Alunos",
                 columns: table => new
                 {
-                    Matricula = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Nome = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Matricula = table.Column<int>(type: "int", nullable: false),
+                    Nome = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Email = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     EnderecoId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Alunos", x => x.Matricula);
+                    table.PrimaryKey("PK_Alunos", x => x.Id);
                     table.ForeignKey(
                         name: "FK_Alunos_Enderecos_EnderecoId",
                         column: x => x.EnderecoId,
@@ -49,6 +50,12 @@ namespace AtividadeFinal_Modulo2_Otavio.Migrations
                 name: "IX_Alunos_EnderecoId",
                 table: "Alunos",
                 column: "EnderecoId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Alunos_Matricula",
+                table: "Alunos",
+                column: "Matricula",
+                unique: true);
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

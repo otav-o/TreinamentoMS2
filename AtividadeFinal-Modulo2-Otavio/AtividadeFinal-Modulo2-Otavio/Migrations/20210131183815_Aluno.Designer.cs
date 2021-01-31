@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AtividadeFinal_Modulo2_Otavio.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    [Migration("20210131171248_Aluno")]
+    [Migration("20210131183815_Aluno")]
     partial class Aluno
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -23,7 +23,7 @@ namespace AtividadeFinal_Modulo2_Otavio.Migrations
 
             modelBuilder.Entity("AtividadeFinal_Modulo2_Otavio.Models.Aluno", b =>
                 {
-                    b.Property<int>("Matricula")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .UseIdentityColumn();
@@ -34,13 +34,18 @@ namespace AtividadeFinal_Modulo2_Otavio.Migrations
                     b.Property<int?>("EnderecoId")
                         .HasColumnType("int");
 
+                    b.Property<int>("Matricula")
+                        .HasColumnType("int");
+
                     b.Property<string>("Nome")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("Matricula");
+                    b.HasKey("Id");
 
                     b.HasIndex("EnderecoId");
+
+                    b.HasIndex("Matricula")
+                        .IsUnique();
 
                     b.ToTable("Alunos");
                 });

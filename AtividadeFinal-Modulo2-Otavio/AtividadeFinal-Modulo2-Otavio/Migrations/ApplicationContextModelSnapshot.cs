@@ -21,7 +21,7 @@ namespace AtividadeFinal_Modulo2_Otavio.Migrations
 
             modelBuilder.Entity("AtividadeFinal_Modulo2_Otavio.Models.Aluno", b =>
                 {
-                    b.Property<int>("Matricula")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .UseIdentityColumn();
@@ -32,13 +32,18 @@ namespace AtividadeFinal_Modulo2_Otavio.Migrations
                     b.Property<int?>("EnderecoId")
                         .HasColumnType("int");
 
+                    b.Property<int>("Matricula")
+                        .HasColumnType("int");
+
                     b.Property<string>("Nome")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("Matricula");
+                    b.HasKey("Id");
 
                     b.HasIndex("EnderecoId");
+
+                    b.HasIndex("Matricula")
+                        .IsUnique();
 
                     b.ToTable("Alunos");
                 });

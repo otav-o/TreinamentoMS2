@@ -13,63 +13,34 @@ namespace AtividadeFinal_Modulo2_Otavio
             Console.WriteLine("Fim do programa");
         }
 
-
-        //private static void Cadastrar<T> (T obj)
-        //{
-        //    using (var context = new ApplicationContext())
-        //    {
-        //        context.Add(obj);
-        //        context.SaveChanges();
-        //    }
-        //}
-
         private static void Cadastrar<T>(T obj)
         {
             DAOGenerica<T> dao = new DAOGenerica<T>();
             dao.Inserir(obj);
         }
 
-        //private static void MenuPrincipal()
-        //{
-        //    Console.Write("GERENCIADOR DE ALUNOS" +
-        //        "\n[1] Inserir aluno" +
-        //        "\n[2] Alterar aluno" +
-        //        "\n[3] Excluir aluno" +
-        //        "\n[4] Consultar aluno por matrícula" +
-        //        "\n[5] Consultar aluno por parte do nome" +
-        //        "\n Digite o número da opção desejada: ");
-        //    var resp = Console.ReadLine();
-        //    switch (resp)
-        //    {
-        //        case "1": InserirAlunoMenu(); break;
-        //        case "2": AlterarAlunoMenu(); break;
-        //        case "3": ExcluirAlunoMenu(); break;
-        //        case "4": ConsultarAlunoMatricula(); break;
-        //        case "5": ConsultarAlunoParteNome(); break;
-        //        default:
-        //            Console.WriteLine("Opção inválida!");
-        //            MenuPrincipal();
-        //            break;
-        //    }
-        //}
         private static void InserirAlunoMenu()
         {
             Console.WriteLine("--- Cadastro de aluno ---");
             var obj = new Aluno();
 
-            //Console.Write("  Matrícula: ");
-            //obj.Matricula = Convert.ToInt32(Console.ReadLine());
-            Console.Write("  Nome: ");
+            Console.Write("  Matrícula: ");
+            obj.Matricula = Convert.ToInt32(Console.ReadLine());
 
+            Console.Write("  Nome: ");
             obj.Nome = Console.ReadLine();
+
             Console.Write("  E-mail: ");
             obj.Email = Console.ReadLine();
 
             Console.Write("Deseja inserir um endereço? ");
             var resp = Console.ReadLine().Trim().ToLower()[0];
-            if (resp == 's')
+            while (resp == 's')
+            {
                 InserirEnderecoMenu(obj);
-
+                Console.Write("Deseja inserir outro endereço? ");
+                resp = Console.ReadLine().Trim().ToLower()[0];
+            }
             Cadastrar<Aluno>(obj);
         }
 
@@ -97,8 +68,6 @@ namespace AtividadeFinal_Modulo2_Otavio
             end.Cidade = Console.ReadLine();
 
             Cadastrar<Endereco>(end);
-
-            // obj.Endereco.Id = end.Id;
 
             // TODO associar um aluno a um endereço
 

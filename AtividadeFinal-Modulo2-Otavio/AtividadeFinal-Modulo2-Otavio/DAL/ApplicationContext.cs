@@ -15,5 +15,12 @@ namespace AtividadeFinal_Modulo2_Otavio.DAL
         {
             optionsBuilder.UseSqlServer(@"Integrated Security=SSPI;Trusted_Connection=true;Persist Security Info=False;Initial Catalog=CadastroDeAlunos;Data Source=localhost\SQLEXPRESS");
         }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Aluno>()
+                .HasIndex(x => x.Matricula) // definir matrícula como única
+                .IsUnique(true);
+        }
     }
 }

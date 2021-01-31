@@ -8,11 +8,11 @@ namespace AtividadeFinal_Modulo2_Otavio.Models
 {
     public class Aluno
     {
-        [Key]
-        public int Matricula { get; set; }
-        [Required]
+        public int Id { get; set; }
+        public int Matricula { get; set; } // não consegui atribuir valor a Matricula quando ela era PK, por isso o criei o Id
+        // matricula é definida como unique em ApplicationContext
         public string Nome { get; set; }
         public string Email { get; set; }
-        public Endereco Endereco { get; set; } // mais de um endereço?
+        public Endereco Endereco { get; set; } 
     }
 }
