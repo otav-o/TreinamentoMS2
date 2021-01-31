@@ -34,7 +34,7 @@ namespace AtividadeFinal_Modulo2_Otavio
             {
                 case "1": InserirAlunoMenu(); break;
                 case "2": AlterarAlunoMenu(); break;
-                //case "3": ExcluirAlunoMenu(); break;
+                case "3": ExcluirAlunoMenu(); break;
                 //case "4": ConsultarAlunoMatricula(); break;
                 //case "5": ConsultarAlunoParteNome(); break;
                 default:
@@ -44,15 +44,29 @@ namespace AtividadeFinal_Modulo2_Otavio
             }
         }
 
-        private static void AlterarAlunoMenu()
+        private static Aluno RetornarAlunoPorMatriculaMenu(string texto)
         {
-            inicio:
-            Console.Write("ALTERAR ALUNO\nInsira o n° de matrícula: ");
+        inicio:
+            Console.Write($"{texto} ALUNO\nInsira o n° de matrícula: ");
             var mat = Convert.ToInt32(Console.ReadLine());
             var dao = new AlunoDAO();
             var aluno = dao.RetornarPorMatricula(mat);
 
             if (aluno == null) { Console.WriteLine("Matrícula inválida!"); goto inicio; }
+            else return aluno;
+        }
+
+        private static void ExcluirAlunoMenu()
+        {
+            Aluno aluno = RetornarAlunoPorMatriculaMenu("EXCLUIR");
+            var dao = new DAOGenerica<Aluno>();
+            dao.Excluir(aluno);
+            Console.WriteLine($"Aluno n° {aluno.Matricula} excluído com sucesso");
+        }
+
+        private static void AlterarAlunoMenu()
+        {
+            Aluno aluno = RetornarAlunoPorMatriculaMenu("ALTERAR");
 
             Console.Write("Deseja alterar o nome? [S/N] "); string resp = Console.ReadLine().Trim().ToUpper();
             if (resp == "S")
