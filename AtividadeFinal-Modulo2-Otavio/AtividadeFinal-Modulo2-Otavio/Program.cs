@@ -36,12 +36,26 @@ namespace AtividadeFinal_Modulo2_Otavio
                 case "2": AlterarAlunoMenu(); break;
                 case "3": ExcluirAlunoMenu(); break;
                 case "4": ConsultarAlunoMatricula(); break;
-                //case "5": ConsultarAlunoParteNome(); break;
+                case "5": ConsultarAlunoParteNome(); break;
                 default:
+                    Console.Clear();
                     Console.WriteLine("Opção inválida!");
                     MenuPrincipal();
                     break;
             }
+        }
+
+        private static void ConsultarAlunoParteNome()
+        {
+            Console.Write("Insira parte do nome do aluno: ");
+            string parteNome = Console.ReadLine();
+            var dao = new AlunoDAO();
+            var alunos = dao.RetornarPorParteNome(parteNome);
+            if (alunos.Count == 0) 
+                Console.WriteLine("Nenhum aluno encontrado.");
+            else 
+                foreach (Aluno a in alunos) 
+                    ImprimirDados(a);
         }
 
         private static void ConsultarAlunoMatricula()

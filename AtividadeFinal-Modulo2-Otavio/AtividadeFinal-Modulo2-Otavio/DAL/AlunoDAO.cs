@@ -18,13 +18,12 @@ namespace AtividadeFinal_Modulo2_Otavio.DAL
             return aluno;
         }
 
-        public Aluno RetornarPorParteNome(string parteNome)
+        public List<Aluno> RetornarPorParteNome(string parteNome)
         {
-            Aluno aluno = null;
+            List<Aluno> aluno;
             using (var context = new ApplicationContext())
             {
-                //aluno = context.Alunos.Where(x => x.Nome ).FirstOrDefault();
-                // TODO Descobrir como pesquisar parte do nome pelo Entity
+                aluno = context.Alunos.Where(x => x.Nome.Contains(parteNome)).ToList();
             }
             return aluno;
         }
