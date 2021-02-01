@@ -35,13 +35,44 @@ namespace AtividadeFinal_Modulo2_Otavio
                 case "1": InserirAlunoMenu(); break;
                 case "2": AlterarAlunoMenu(); break;
                 case "3": ExcluirAlunoMenu(); break;
-                //case "4": ConsultarAlunoMatricula(); break;
+                case "4": ConsultarAlunoMatricula(); break;
                 //case "5": ConsultarAlunoParteNome(); break;
                 default:
                     Console.WriteLine("Opção inválida!");
                     MenuPrincipal();
                     break;
             }
+        }
+
+        private static void ConsultarAlunoMatricula()
+        {
+            Aluno aluno = RetornarAlunoPorMatriculaMenu("CONSULTAR");
+            ImprimirDados(aluno);
+        }
+
+        private static void ImprimirDados(Aluno obj)
+        {
+            Console.WriteLine($"---- ALUNO {obj.Matricula} ----" +
+                $"\nNome: {obj.Nome}" +
+                $"\nE-mail: {obj.Email}");
+            ImprimirEndereco(obj);
+        }
+
+        private static void ImprimirEndereco(Aluno obj)
+        {
+            Endereco end = RetornarEnderecoPorAluno(obj);
+            if (end == null) Console.WriteLine("Sem endereço cadastrado.");
+            else
+            {
+                Console.WriteLine($"{end.Logradouro}, {end.Numero}/{end.Complemento}, {end.Bairro}, {end.Cidade}");
+            }
+
+        }
+
+        private static Endereco RetornarEnderecoPorAluno(Aluno aluno)
+        {
+            var dao = new EnderecoDAO();
+            return dao.RetornarPorAluno(aluno);
         }
 
         private static Aluno RetornarAlunoPorMatriculaMenu(string texto)
