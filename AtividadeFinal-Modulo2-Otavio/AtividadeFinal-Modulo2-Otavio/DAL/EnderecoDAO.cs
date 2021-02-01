@@ -9,16 +9,16 @@ namespace AtividadeFinal_Modulo2_Otavio.DAL
     class EnderecoDAO
     {
         /// <summary>
-        /// Retorna o endereço de um aluno
+        /// Retorna os endereços de um aluno
         /// </summary>
         /// <param name="aluno"></param>
         /// <returns></returns>
-        public Endereco RetornarPorAluno(Aluno aluno)
+        public List<Endereco> RetornarPorAluno(Aluno aluno)
         {
-            Endereco endereco;
+            List<Endereco >endereco;
             using (var context = new ApplicationContext())
             {
-                endereco = context.Enderecos.Where(x => x.Aluno == aluno).FirstOrDefault();
+                endereco = context.Enderecos.Where(x => x.Aluno == aluno).ToList();
             }
             return endereco;
         }

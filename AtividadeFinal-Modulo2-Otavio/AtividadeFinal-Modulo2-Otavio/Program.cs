@@ -1,6 +1,7 @@
 ﻿using AtividadeFinal_Modulo2_Otavio.DAL;
 using AtividadeFinal_Modulo2_Otavio.Models;
 using System;
+using System.Collections.Generic;
 
 namespace AtividadeFinal_Modulo2_Otavio
 {
@@ -74,15 +75,16 @@ namespace AtividadeFinal_Modulo2_Otavio
 
         private static void ImprimirEndereco(Aluno obj)
         {
-            Endereco end = RetornarEnderecoPorAluno(obj);
-            if (end == null) Console.WriteLine("Sem endereço cadastrado.");
+            var enderecos = RetornarEnderecosPorAluno(obj);
+            if (enderecos.Count == 0) Console.WriteLine("Sem endereço cadastrado.");
             else
             {
-                Console.WriteLine($"{end.Logradouro}, {end.Numero}/{end.Complemento}, {end.Bairro}, {end.Cidade}");
+                foreach (Endereco e in enderecos)
+                Console.WriteLine($"{e.Logradouro}, {e.Numero}/{e.Complemento}, {e.Bairro}, {e.Cidade}");
             }
         }
 
-        private static Endereco RetornarEnderecoPorAluno(Aluno aluno)
+        private static List<Endereco> RetornarEnderecosPorAluno(Aluno aluno)
         {
             var dao = new EnderecoDAO();
             return dao.RetornarPorAluno(aluno);
@@ -150,10 +152,10 @@ namespace AtividadeFinal_Modulo2_Otavio
             Console.Write("  E-mail: ");
             obj.Email = Console.ReadLine();
 
-            //Cadastrar<Aluno>(obj); // insere o aluno da base de dados
-            //var daoAluno = new AlunoDAO(); 
+            Cadastrar<Aluno>(obj); // insere o aluno da base de dados
+            var daoAluno = new AlunoDAO();
 
-            //obj = daoAluno.RetornarPorMatricula(obj.Matricula); // pega o aluno de volta
+            obj = daoAluno.RetornarPorMatricula(obj.Matricula); // pega o aluno de volta
 
             Console.Write("Deseja inserir um endereço? ");
             var resp = Console.ReadLine().Trim().ToLower()[0];
@@ -161,11 +163,11 @@ namespace AtividadeFinal_Modulo2_Otavio
             {
                 var end = InserirEnderecoMenu(); // recebe um endereço preenchido
                 end.Aluno = obj; // adiciona o aluno ao objeto endereço
-                Cadastrar<Endereco>(end); // já adiciona o aluno. Problema: não dá para adicionar mais de um endereço
+                Cadastrar<Endereco>(end); // não adiona o aluno também (contexto.State está Added)
                 Console.Write("Deseja inserir outro endereço? ");
                 resp = Console.ReadLine().Trim().ToLower()[0];
             }
-            
+
         }
 
         private static Endereco InserirEnderecoMenu()

@@ -11,7 +11,7 @@ namespace AtividadeFinal_Modulo2_Otavio.DAL
         {
             using (var context = new ApplicationContext())
             {
-                context.Add(obj);
+                context.Entry(obj).State = Microsoft.EntityFrameworkCore.EntityState.Added;
                 context.SaveChanges();
             }
         }
