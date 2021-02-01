@@ -80,7 +80,6 @@ namespace AtividadeFinal_Modulo2_Otavio
             {
                 Console.WriteLine($"{end.Logradouro}, {end.Numero}/{end.Complemento}, {end.Bairro}, {end.Cidade}");
             }
-
         }
 
         private static Endereco RetornarEnderecoPorAluno(Aluno aluno)
@@ -151,17 +150,18 @@ namespace AtividadeFinal_Modulo2_Otavio
             Console.Write("  E-mail: ");
             obj.Email = Console.ReadLine();
 
-            Cadastrar<Aluno>(obj);
-            var daoAluno = new AlunoDAO();
+            //Cadastrar<Aluno>(obj); // insere o aluno da base de dados
+            //var daoAluno = new AlunoDAO(); 
 
-            obj = daoAluno.RetornarPorMatricula(obj.Matricula);
+            //obj = daoAluno.RetornarPorMatricula(obj.Matricula); // pega o aluno de volta
 
             Console.Write("Deseja inserir um endereço? ");
             var resp = Console.ReadLine().Trim().ToLower()[0];
             while (resp == 's')
             {
-                var end = InserirEnderecoMenu();
-                end.Aluno = obj;
+                var end = InserirEnderecoMenu(); // recebe um endereço preenchido
+                end.Aluno = obj; // adiciona o aluno ao objeto endereço
+                Cadastrar<Endereco>(end); // já adiciona o aluno. Problema: não dá para adicionar mais de um endereço
                 Console.Write("Deseja inserir outro endereço? ");
                 resp = Console.ReadLine().Trim().ToLower()[0];
             }
@@ -192,9 +192,6 @@ namespace AtividadeFinal_Modulo2_Otavio
             end.Cidade = Console.ReadLine();
 
             return end;
-
-            //end.Aluno = obj;
-            //Cadastrar<Endereco>(end); // já insere aluno na tabela Alunos
         }
     }
 }
