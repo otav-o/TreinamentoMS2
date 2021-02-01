@@ -105,14 +105,23 @@ namespace AtividadeFinal_Modulo2_Otavio
         private static void ExcluirAlunoMenu()
         {
             Aluno aluno = RetornarAlunoPorMatriculaMenu("EXCLUIR");
+            ExcluirEnderecos(aluno); // para evitar chave estrangeira inconsistente
             var dao = new DAOGenerica<Aluno>();
             dao.Excluir(aluno);
             Console.WriteLine($"Aluno n° {aluno.Matricula} excluído com sucesso");
         }
 
+        private static void ExcluirEnderecos(Aluno obj)
+        {
+            var daoEndereco = new DAOGenerica<Endereco>();
+            var enderecos = RetornarEnderecosPorAluno(obj);
+            foreach(var e in enderecos) daoEndereco.Excluir(e);
+        }
+
         private static void AlterarAlunoMenu()
         {
             Aluno aluno = RetornarAlunoPorMatriculaMenu("ALTERAR");
+            List<Endereco> enderecos = RetornarEnderecosPorAluno(aluno);
 
             Console.Write("Deseja alterar o nome? [S/N] "); string resp = Console.ReadLine().Trim().ToUpper();
             if (resp == "S")
@@ -129,13 +138,26 @@ namespace AtividadeFinal_Modulo2_Otavio
             Console.Write("Deseja alterar o endereço? [S/N] "); resp = Console.ReadLine().Trim().ToUpper();
             if (resp == "S")
             {
-                var end = InserirEnderecoMenu();
-                end.Aluno = aluno;
+                if (enderecos.Count == 0) Console.WriteLine("Não há endereços para alteração");
+                else
+                {
+                    Console.WriteLine("Qual o tipo de endereço que deseja alterar?");
+                    var respTipo = Console.ReadLine();
+                    foreach (var e in enderecos)
+                    {
+                        if (e.Tipo == respTipo) AlterarEndereco(e);
+                    }
+                }
             }
-            var dao2 = new DAOGenerica<Aluno>();
-            dao2.Alterar(aluno);
+            var dao = new DAOGenerica<Aluno>();
+            dao.Alterar(aluno);
+        }
 
-            // TODO o endereço ainda não está sendo alterado
+        private static void AlterarEndereco(Endereco e)
+        {
+            PreenchimentoEndereco(e);
+            var dao = new DAOGenerica<Endereco>();
+            dao.Alterar(e);
         }
 
         private static void InserirAlunoMenu()
@@ -173,8 +195,16 @@ namespace AtividadeFinal_Modulo2_Otavio
         private static Endereco InserirEnderecoMenu()
         {
             Console.WriteLine("    -- Cadastro de endereço");
+
             var end = new Endereco();
 
+            PreenchimentoEndereco(end);
+            
+            return end;
+        }
+
+        private static void PreenchimentoEndereco(Endereco end)
+        {
             Console.Write("      Qual o tipo do endereço?[residencial/comercial] ");
             end.Tipo = Console.ReadLine();
 
@@ -192,8 +222,6 @@ namespace AtividadeFinal_Modulo2_Otavio
 
             Console.Write("      Cidade: ");
             end.Cidade = Console.ReadLine();
-
-            return end;
         }
     }
 }
