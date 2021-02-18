@@ -27,6 +27,6 @@ namespace TesteInjecaoDependencia
                 Console.WriteLine("Siga para a sala 2");
         }
 
-        private ISaudacao saudacao = new SaudacaoAmigavel();
+        private ISaudacao saudacao = new SaudacaoInformal(); // teria que mudar sempre aqui
     }
 }
