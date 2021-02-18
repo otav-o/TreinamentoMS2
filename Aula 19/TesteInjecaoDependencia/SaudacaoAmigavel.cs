@@ -4,7 +4,7 @@ using System.Text;
 
 namespace TesteInjecaoDependencia
 {
-    class SaudacaoAmigavel
+    class SaudacaoAmigavel : ISaudacao
     {
         public void Realizar(string nome)
         {
