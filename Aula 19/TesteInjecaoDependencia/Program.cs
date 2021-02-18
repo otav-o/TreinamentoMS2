@@ -10,14 +10,10 @@ namespace TesteInjecaoDependencia
             #region Vou tirar isso daqui ainda
 
             IServiceCollection services = new ServiceCollection() // cria-se um objeto ServiceCollection
-                .AddSingleton<ISaudacao, SaudacaoAmigavel>(); // onde for esperado uma objeto ISaudacao, forneça uma instância de SaudacaoInformal
-                                                              //.AddTrasient<IRecepcao, RecepcaoDireta>();
+                .AddSingleton<ISaudacao, SaudacaoInformal>() // onde for esperado uma objeto ISaudacao, forneça uma instância de SaudacaoInformal
+                .AddTransient<RecepcaoDireta, RecepcaoDireta>(); // quando for uma RecepcaoDireta, retorne uma RecepcaoDireta
 
             var provedor = services.BuildServiceProvider(); // cria um provedor de serviços
-
-            var saudacaoDI = provedor.GetService<ISaudacao>(); // provedor retorna instâncias de ISaudacao
-
-            saudacaoDI.Realizar("Zé");
 
             // obs.: adicionar o Microsoft.Extensions.DependencyInjection pelo NuGet
 
@@ -32,7 +28,11 @@ namespace TesteInjecaoDependencia
 
             nome = Console.ReadLine();
 
-            RecepcaoDireta recepcao = new RecepcaoDireta(new SaudacaoInformal()); // agora é aqui que se define a saudação (e não na classe recepção)
+            var recepcao = provedor.GetService<RecepcaoDireta>(); 
+            // pede uma instância de RecepcaoDireta
+            // mandou-se instanciar RecepcaoDireta e ele conseguiu entender que, para fazer isso, deve-se passar um ISaudacao pelo construtor, instanciando SaudacaoInformal ou SaudacaoAmigavel (depende do que foi configurado)
+            // no momento, o escopo desse provedor é o Main
+
             recepcao.Recepcionar(nome);
         }
     }
