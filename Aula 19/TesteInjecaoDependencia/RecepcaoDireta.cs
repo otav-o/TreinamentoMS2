@@ -6,8 +6,7 @@ namespace TesteInjecaoDependencia
 {
     class RecepcaoDireta
     {
-        // uso de construtor
-        public RecepcaoDireta(ISaudacao saudacao) => this.saudacao = saudacao; // não se instancia mais a saudacao na classe.
+        public RecepcaoDireta(ISaudacao saudacao) => this.saudacao = saudacao;
         public void Recepcionar(string nome)
         {
             Cumprimentar(nome);
