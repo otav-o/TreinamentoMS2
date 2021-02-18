@@ -12,7 +12,7 @@ namespace TesteInjecaoDependencia
 
             nome = Console.ReadLine();
 
-            var recepcao = Instancia.Get<RecepcaoDireta>();
+            var recepcao = Instancia.Get<IRecepcao>();
 
             recepcao.Recepcionar(nome);
         }

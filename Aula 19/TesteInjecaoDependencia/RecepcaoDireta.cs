@@ -4,7 +4,7 @@ using System.Text;
 
 namespace TesteInjecaoDependencia
 {
-    class RecepcaoDireta
+    class RecepcaoDireta : IRecepcao
     {
         public RecepcaoDireta(ISaudacao saudacao) => this.saudacao = saudacao;
         public void Recepcionar(string nome)

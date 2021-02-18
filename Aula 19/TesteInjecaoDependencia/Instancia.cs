@@ -11,7 +11,7 @@ namespace TesteInjecaoDependencia
         {
             IServiceCollection services = new ServiceCollection() // cria-se um objeto ServiceCollection
                 .AddSingleton<ISaudacao, SaudacaoAmigavel>() // onde for esperado uma objeto ISaudacao, forneça uma instância de SaudacaoInformal
-                .AddTransient<RecepcaoDireta, RecepcaoDireta>(); // quando for uma RecepcaoDireta, retorne uma RecepcaoDireta
+                .AddTransient<IRecepcao, RecepcaoDireta>(); // quando for uma IRecepcao, retorne uma RecepcaoDireta
 
             provedor = services.BuildServiceProvider(); // criação do provedor
         }
