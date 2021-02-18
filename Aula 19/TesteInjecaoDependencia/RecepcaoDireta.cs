@@ -6,6 +6,8 @@ namespace TesteInjecaoDependencia
 {
     class RecepcaoDireta
     {
+        // uso de construtor
+        public RecepcaoDireta(ISaudacao saudacao) => this.saudacao = saudacao; // não se instancia mais a saudacao na classe.
         public void Recepcionar(string nome)
         {
             Cumprimentar(nome);
@@ -27,6 +29,6 @@ namespace TesteInjecaoDependencia
                 Console.WriteLine("Siga para a sala 2");
         }
 
-        private ISaudacao saudacao = new SaudacaoInformal(); // teria que mudar sempre aqui
+        private ISaudacao saudacao;
     }
 }

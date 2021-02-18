@@ -12,7 +12,7 @@ namespace TesteInjecaoDependencia
 
             nome = Console.ReadLine();
 
-            RecepcaoDireta recepcao = new RecepcaoDireta();
+            RecepcaoDireta recepcao = new RecepcaoDireta(new SaudacaoInformal()); // agora é aqui que se define a saudação (e não na classe recepção)
             recepcao.Recepcionar(nome);
         }
     }
