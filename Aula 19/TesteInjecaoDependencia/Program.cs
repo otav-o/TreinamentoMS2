@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Extensions.DependencyInjection;
+using System;
 
 namespace TesteInjecaoDependencia
 {
@@ -6,6 +7,25 @@ namespace TesteInjecaoDependencia
     {
         static void Main(string[] args)
         {
+            #region Vou tirar isso daqui ainda
+
+            IServiceCollection services = new ServiceCollection() // cria-se um objeto ServiceCollection
+                .AddSingleton<ISaudacao, SaudacaoAmigavel>(); // onde for esperado uma objeto ISaudacao, forneça uma instância de SaudacaoInformal
+                                                              //.AddTrasient<IRecepcao, RecepcaoDireta>();
+
+            var provedor = services.BuildServiceProvider(); // cria um provedor de serviços
+
+            var saudacaoDI = provedor.GetService<ISaudacao>(); // provedor retorna instâncias de ISaudacao
+
+            saudacaoDI.Realizar("Zé");
+
+            // obs.: adicionar o Microsoft.Extensions.DependencyInjection pelo NuGet
+
+            #endregion
+
+
+
+
             string nome;
 
             Console.Write("Informe o seu nome: ");
